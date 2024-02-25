@@ -559,22 +559,35 @@ void zad14(){
 	typedef struct {
 	int wysokosc;
 	int szerokosc;
+
+	void rysuj(){
+		for (int i = 0; i < this->wysokosc; i++){
+			for (int j = 0; j < this->szerokosc; j++)
+			{
+				if(i==0||i==this->wysokosc-1) std::cout<<'*';
+				else if (j==0 || j==this->szerokosc-1 ) std::cout<<'*';
+				else std::cout<<' ';
+			}
+			std::cout<<std::endl;
+		}
+	}
+
+	int pole(){
+		return this->wysokosc*this->szerokosc;
+	}
+
+	int obwod(){
+		return (this->szerokosc*2)+(this->wysokosc*2);
+	}
+
 	}prostokat;
 
 	prostokat p;
 	p.wysokosc=pobierzInt("Podaj wysokosc prostokata: ");
 	p.szerokosc=pobierzInt("Podaj szerokosc prostokata: ");
 	std::cout<<std::endl;
+	p.rysuj();
 
-	for (int i = 0; i < p.wysokosc; i++)
-	{
-		for (int j = 0; j < p.szerokosc; j++)
-		{
-			if(i==0||i==p.wysokosc-1) std::cout<<'*';
-			else if (j==0 || j==p.szerokosc-1 ) std::cout<<'*';
-			else std::cout<<' ';
-		}
-		std::cout<<std::endl;
-		
-	}
+	std::cout<<"Pole tego prostokata jest rowne "<<p.pole()<<std::endl;
+	std::cout<<"Obwod tego prostokata jest rowny "<<p.obwod()<<std::endl;
 }
