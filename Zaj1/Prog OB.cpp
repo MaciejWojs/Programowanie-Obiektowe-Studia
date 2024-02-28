@@ -508,15 +508,15 @@ typedef struct {
 		this->im=pobierzInt("Podaj czesc zespolona: ");
 	}
 
-	}zespolona;
+}zespolona;
 
 
-	zespolona operator+(zespolona a, zespolona b){
-		zespolona n;
-		n.re = b.re + a.re;
-		n.im = b.im + a.im;
-		return n;
-	}
+zespolona operator+(zespolona a, zespolona b){
+	zespolona n;
+	n.re = b.re + a.re;
+	n.im = b.im + a.im;
+	return n;
+}
 
 void zad13() {
 	/* 
