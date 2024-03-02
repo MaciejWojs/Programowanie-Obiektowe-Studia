@@ -25,6 +25,7 @@ class kalkualtor {
 	kalkualtor() : liczba1(0), liczba2(0) {
 		std::cout << "Konstruktor\n";
 	};
+
 	~kalkualtor() {
 		std::cout << "Destruktor\n";
 	}
@@ -51,14 +52,16 @@ void zad1();
 void zad2();
 void zad3();
 void zad4();
+void zad5();
 
 int main() {
 	/*
 	zad1();
 	zad2();
 	zad3();
-	*/
 	zad4();
+	*/
+	zad5();
 	return 0;
 }
 void zad1() {
@@ -335,7 +338,6 @@ void zad4() {
 
 		~trojkat(void) {
 			std::cout << "Dekonstruktor\n";
-
 		};
 
 		int obwod(void) {
@@ -393,5 +395,68 @@ void zad4() {
 		std::cout << "Trojkat jest rownoramienny\n";
 	} else {
 		std::cout << "Trojkat nie jest rownoramienny\n";
+	}
+}
+
+void zad5() {
+	/*
+	Napisz program, gdzie mamy taką klasę:
+	class prostokat {
+		private:
+			int bok1;
+			int bok2;
+		public:
+			prostokat(void);
+			~prostokat(void);
+			int obwod(void);
+			int pole(void);
+			int czy_kwadrat(void);
+			void klawiatura(void);
+	};
+	Mając klasę, uzupełnij metody, wraz z konstruktorem i destruktorem. Metoda klawiatura ma za
+	zadanie pobrać z klawiatury dwie cyfry potrzebne do wykonania obliczeń. Metoda pole i obwod
+	wylicza pole i obwód. Metoda czy_kwadrat zwraca 1 gdy bok1 i bok2 są równe lub zwraca 0 gdy boki
+	są różne. W funkcji main wywołaj wszystkie metody
+	*/
+	class prostokat {
+		private:
+		int bok1;
+		int bok2;
+
+		public:
+		prostokat(void) : bok1(0), bok2(0) {
+			std::cout << "Konstruktor\n\n";
+		};
+
+		~prostokat(void) {
+			std::cout << "Dekonstruktor\n\n";
+
+		};
+
+		int obwod(void) {
+			return ((2 * bok1) + (2 * bok2));
+		}
+
+		int pole(void) {
+			return bok1 * bok2;
+		}
+
+		int czy_kwadrat(void) {
+			if (bok1 == bok2) return 1;
+			else return 0;
+		};
+
+		void klawiatura(void) {
+			bok1 = pobierzInt("Podaj pierwszy bok prostokata: ");
+			bok2 = pobierzInt("Podaj drugi bok prostokata: ");
+		}
+	};
+
+	prostokat p;
+	p.klawiatura();
+	std::cout << "Obwod prostokata: " << p.obwod() << '\n';
+	std::cout << "Pole prostokata: " << p.pole() << '\n';
+	if (p.czy_kwadrat()) {
+		std::cout << "Ten prostokat jest rownoczesnie kwadratem\n";
 	}
 }
