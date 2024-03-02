@@ -102,15 +102,62 @@ void zad2(){
 	Mając klasę, uzupełnij metody, wraz z konstruktorem i destruktorem. Metoda klawiatura ma za 
 	zadanie pobrać z klawiatury dwie cyfry potrzebne do wykonania obliczeń. Metoda czy_rowne zwraca 
 	1 gdy liczby są równe lub zwraca 0 gdy liczby są różne. W funkcji main utwórz nowy obiekt o nazwie 
-	„zadanie” na podstawie klasy operacje, a następnie wywołaj wszystkie metody. Metoda czy_rowne 
+	„zadanie" na podstawie klasy operacje, a następnie wywołaj wszystkie metody. Metoda czy_rowne 
 	ma być wywołana w main w ten sposób: 
 	
 	
 	if(zadanie.czy_rowne()){
-		cout<<” liczby sa rowne”;
+		cout<<" liczby sa rowne";
 	}
 	else{
-		cout<<” liczby sa rozne”;
+		cout<<" liczby sa rozne";
 	}
  */
+	class operacje {
+		private:
+			int liczba1;
+			int liczba2;
+		public:
+
+			operacje(void): liczba1(0), liczba2(0){
+				std::cout<<"Konstruktor\n";
+			};
+			
+			~operacje(void){
+				std::cout<<"Dekonstruktor\n";
+			};
+
+			int wieksza(void){
+				if (liczba1>liczba2) return 1;
+				else return 0;
+			};
+
+			int mniejsza(void){
+				if (liczba1<liczba2) return 1;
+				else return 0;
+			};
+
+			int czy_rowne(void){
+				if (liczba1==liczba2) return 1;
+				else return 0;
+			};
+			
+			void klawiatura(void){
+				liczba1= pobierzInt("Podaj piersza liczbe: ");
+				liczba2= pobierzInt("Podaj druga liczbe: ");
+			};
+	};
+	
+	operacje zadanie;
+	zadanie.klawiatura();
+
+	if(zadanie.czy_rowne()){
+		std::cout<<"liczby sa rowne\n";
+	}
+	else{
+		std::cout<<"liczby sa rozne\n";
+	}
+	
+	std::cout<<"Większa: "<<zadanie.wieksza()<<'\n';
+	std::cout<<"Mniejsza: "<<zadanie.mniejsza()<<'\n';
 }
