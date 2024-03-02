@@ -49,12 +49,14 @@ class kalkualtor{
 
 void zad1();
 void zad2();
+void zad3();
 
 int main() {
 	/*
 	zad1();
-	*/
 	zad2();
+	*/
+	zad3();
 return 0;
 }
 void zad1(){
@@ -160,4 +162,34 @@ void zad2(){
 	
 	std::cout<<"Większa: "<<zadanie.wieksza()<<'\n';
 	std::cout<<"Mniejsza: "<<zadanie.mniejsza()<<'\n';
+}
+
+void  zad3(){
+/* 
+	Napisz program, gdzie mamy taką klasę:
+	class algorytmy {
+		private:
+			int liczba1;
+			int liczba2;
+			int liczba3;
+			int liczba4;
+		public:
+		algorytmy(void);
+		~algorytmy(void);
+		int max(void);
+		int mini(void);
+		int suma(void);
+		int szukana(int x);
+		int parzyste(void);
+		void klawiatura(void);
+	};
+	Mając klasę, uzupełnij metody, wraz z konstruktorem i destruktorem. Metoda klawiatura ma za 
+	zadanie pobrać z klawiatury cztery cyfry potrzebne do wykonania obliczeń. Metoda max zwraca 
+	największą cyfrę z wprowadzonych, metoda mini zwraca najmniejszą cyfrę. Metoda suma zwraca 
+	sumę czterech cyfr. Metoda szukana pobiera parametr (jakąś cyfrę), a następnie sprawdza czy ta 
+	cyfra jest jedną z czterech. Jeśli jest to metoda zwraca 1, a jeśli nie to zwraca 0. Metoda parzyste
+	zwraca 1 gdy choć jedna liczba z wprowadzonych jest parzysta lub zwraca 0 gdy nie ma liczby 
+	parzystej. Metody szukana i parzyste wywołaj w menu tak samo jak czy_rowne z poprzednim 
+	zadaniu. W funkcji main wywołaj wszystkie metody.
+*/
 }
