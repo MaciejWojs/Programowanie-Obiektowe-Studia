@@ -54,6 +54,7 @@ void zad3();
 void zad4();
 void zad5();
 void zad6();
+void zad7();
 
 int main() {
 	/*
@@ -62,8 +63,9 @@ int main() {
 	zad3();
 	zad4();
 	zad5();
-	*/
 	zad6();
+	*/
+	zad7();
 	return 0;
 }
 void zad1() {
@@ -570,4 +572,64 @@ void zad6() {
 		std::cout << "x1= " << temp.x1 << std::endl;
 		std::cout << "x2= " << temp.x2 << std::endl;
 	}
+}
+
+void zad7() {
+	/*
+	Napisz program kalkulator pojemności, gdzie mamy taką klasę:
+	class pojemnosc {
+		private:
+			int podstawa1;
+			int podstawa2;
+			int wysokosc;
+		public:
+			pojemnosc(void);
+			~pojemnosc(void);
+			int prostopadloscian(void);
+			void klawiatura(void);
+	};
+
+	Mając klasę, uzupełnij metody, wraz z konstruktorem i destruktorem. Metoda klawiatura ma za
+	zadanie pobrać z klawiatury trzy cyfry potrzebne do wykonania obliczeń. Następnie metoda
+	prostopadloscian liczy nam objętość prostopadłościanu. W funkcji main należy utworzyć obiekt
+	o nazwie pr jako obiekt dynamiczny. Funkcja main ma wyglądać w ten sposób:
+
+	int main(int argc, char** argv) {
+		pojemnosc *pr=new pojemnosc;
+		pr->klawiatura();
+		cout<<endl<<"objetosc prostopadloscian "<<pr->prostopadloscian();
+		delete pr;
+	}
+	*/
+
+	class pojemnosc {
+		private:
+		int podstawa1;
+		int podstawa2;
+		int wysokosc;
+
+		public:
+		pojemnosc(void) : podstawa1(0), podstawa2(0), wysokosc(0) {
+			std::cout << "Konstruktor\n\n";
+		}
+
+		~pojemnosc(void) {
+			std::cout << "\n\nDekonstruktor";
+		}
+
+		int prostopadloscian(void) {
+			return podstawa1 * podstawa2 * wysokosc;
+		}
+
+		void klawiatura(void) {
+			podstawa1 = pobierzInt("Podaj pierwsza dlugosc podstawy: ");
+			podstawa2 = pobierzInt("Podaj druga dlugosc podstawy: ");
+			wysokosc = pobierzInt("Podaj wysokosc prostopadloscianu: ");
+		}
+	};
+
+	pojemnosc* pr = new pojemnosc;
+	pr->klawiatura();
+	std::cout << std::endl << "Objetosc prostopadloscianu: " << pr->prostopadloscian() << '\n';
+	delete pr;
 }
