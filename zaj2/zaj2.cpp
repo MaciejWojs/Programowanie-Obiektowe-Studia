@@ -17,37 +17,6 @@ int pobierzInt(string wiadomosc) {
 	return dane;
 }
 
-class kalkualtor {
-	private:
-	int liczba1, liczba2;
-
-	public:
-	kalkualtor() : liczba1(0), liczba2(0) {
-		std::cout << "Konstruktor\n";
-	};
-
-	~kalkualtor() {
-		std::cout << "Destruktor\n";
-	}
-
-	int dodawanie() {
-		return liczba1 + liczba2;
-	}
-
-	int odejmowanie() {
-		return liczba1 - liczba2;
-	}
-
-	int mnozenie() {
-		return liczba1 * liczba2;
-	}
-
-	void klawiatura() {
-		liczba1 = pobierzInt("Podaj pierwsza liczbe: ");
-		liczba2 = pobierzInt("Podaj druga liczbe: ");
-	}
-};
-
 void zad1();
 void zad2();
 void zad3();
@@ -57,15 +26,15 @@ void zad6();
 void zad7();
 
 int main() {
-	/*
+
 	zad1();
 	zad2();
 	zad3();
 	zad4();
 	zad5();
 	zad6();
-	*/
 	zad7();
+
 	return 0;
 }
 void zad1() {
@@ -87,6 +56,38 @@ void zad1() {
 		zadanie pobrać z klawiatury dwie cyfry potrzebne do wykonania obliczeń. W funkcji main wywołaj
 		wszystkie metody
 	*/
+
+	class kalkualtor {
+		private:
+		int liczba1, liczba2;
+
+		public:
+		kalkualtor() : liczba1(0), liczba2(0) {
+			std::cout << "Konstruktor\n";
+		};
+
+		~kalkualtor() {
+			std::cout << "Destruktor\n";
+		}
+
+		int dodawanie() {
+			return liczba1 + liczba2;
+		}
+
+		int odejmowanie() {
+			return liczba1 - liczba2;
+		}
+
+		int mnozenie() {
+			return liczba1 * liczba2;
+		}
+
+		void klawiatura() {
+			liczba1 = pobierzInt("Podaj pierwsza liczbe: ");
+			liczba2 = pobierzInt("Podaj druga liczbe: ");
+		}
+	};
+
 	kalkualtor calc;
 	calc.klawiatura();
 	std::cout << "Wynik dodawania: " << calc.dodawanie() << '\n';
