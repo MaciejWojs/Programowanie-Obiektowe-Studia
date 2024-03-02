@@ -53,6 +53,7 @@ void zad2();
 void zad3();
 void zad4();
 void zad5();
+void zad6();
 
 int main() {
 	/*
@@ -60,8 +61,9 @@ int main() {
 	zad2();
 	zad3();
 	zad4();
-	*/
 	zad5();
+	*/
+	zad6();
 	return 0;
 }
 void zad1() {
@@ -458,5 +460,114 @@ void zad5() {
 	std::cout << "Pole prostokata: " << p.pole() << '\n';
 	if (p.czy_kwadrat()) {
 		std::cout << "Ten prostokat jest rownoczesnie kwadratem\n";
+	}
+}
+
+void zad6() {
+	/*
+	Napisz program równanie, gdzie mamy taką klasę i strukturę:
+	typedef struct{
+		double x1;
+		double x2;
+	}wynik;
+
+	class rownanie {
+		private:
+			int a;
+			int b;
+			int c;
+		public:
+			rownanie(void);
+			~rownanie(void);
+			void klawiatura(void);
+			int delta(void);
+			double jeden(void);
+			wynik dwa(void);
+	};
+
+	Mając klasę, uzupełnij metody, wraz z konstruktorem i destruktorem. Metoda klawiatura ma za
+	zadanie pobrać z klawiatury trzy cyfry potrzebne do wykonania obliczeń. Równanie to ax^2+bx+c.
+	Metoda delta zawraca wartości: 1 dla dwóch miejsc zerowych, 0 dla jednego miejsca zerowego, -1
+	bez miejsca zerowego. Metoda jeden zwraca jedno miejsce zerowe, natomiast metoda dwa zwraca
+	dwa miejsca zerowe korzystając z struktury. Funkcja main ma wyglądać w ten sposób:
+
+	int main(int argc, char** argv) {
+		rownanie r;
+		r.klawiatura();
+		if(r.delta()==-1)
+			cout<<"nie ma miejsc zerowych"<<endl;
+		else if(r.delta()==0){
+			cout<<"jest jedno miejsce zerowe"<<endl;
+			cout<<"x= "<<r.jeden();
+		}else {
+			cout<<"sa dwa miejsca zerowe"<<endl;
+			wynik temp;
+			temp=r.dwa();
+			cout<<"x1= "<<temp.x1<<endl;
+			cout<<"x2= "<<temp.x2<<endl;
+		}
+		return 0;
+	}
+	*/
+
+	typedef struct {
+		double x1;
+		double x2;
+	}wynik;
+
+	class rownanie {
+		private:
+		int a;
+		int b;
+		int c;
+
+		public:
+		rownanie(void) : a(0), b(0), c(0) {
+			std::cout << "Konstruktor\n\n";
+		};
+
+		~rownanie(void) {
+			std::cout << "\n\nDekonstruktor";
+		};
+
+		void klawiatura(void) {
+			a = pobierzInt("Podaj wspolczynnik a: ");
+			b = pobierzInt("Podaj wspolczynnik b: ");
+			c = pobierzInt("Podaj wspolczynnik c: ");
+		}
+
+		int delta(void) {
+			if ((pow(b, 2) - 4 * (a * c)) < 0) {
+				return -1;
+			} else if (pow(b, 2) - 4 * a * c == 0) {
+				return 0;
+			} else return 1;
+		}
+
+		double jeden(void) {
+			return -(b) / (2 * a);
+		}
+		wynik dwa(void) {
+			double d = pow(b, 2) - 4 * (a * c);
+			wynik w;
+			w.x1 = (-(b)-sqrt(d)) / (2 * a);
+			w.x2 = (-(b)+sqrt(d)) / (2 * a);
+			return w;
+		}
+	};
+
+	rownanie r;
+	r.klawiatura();
+	if (r.delta() == -1)
+		std::cout << "nie ma miejsc zerowych" << std::endl;
+	else if (r.delta() == 0) {
+		std::cout << "jest jedno miejsce zerowe" << std::endl;
+		std::cout << "x= " << r.jeden() << '\n';
+	} else {
+		std::cout << "sa dwa miejsca zerowe" << std::endl;
+		wynik temp;
+		temp = r.dwa();
+		std::cout << "x1= " << temp.x1 << std::endl;
+		std::cout << "x2= " << temp.x2 << std::endl;
 	}
 }
