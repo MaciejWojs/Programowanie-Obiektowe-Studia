@@ -165,8 +165,33 @@ void zad2(){
 }
 
 void  zad3(){
-/* 
-	Napisz program, gdzie mamy taką klasę:
+	/* 
+		Napisz program, gdzie mamy taką klasę:
+		class algorytmy {
+			private:
+				int liczba1;
+				int liczba2;
+				int liczba3;
+				int liczba4;
+			public:
+			algorytmy(void);
+			~algorytmy(void);
+			int max(void);
+			int mini(void);
+			int suma(void);
+			int szukana(int x);
+			int parzyste(void);
+			void klawiatura(void);
+		};
+		Mając klasę, uzupełnij metody, wraz z konstruktorem i destruktorem. Metoda klawiatura ma za 
+		zadanie pobrać z klawiatury cztery cyfry potrzebne do wykonania obliczeń. Metoda max zwraca 
+		największą cyfrę z wprowadzonych, metoda mini zwraca najmniejszą cyfrę. Metoda suma zwraca 
+		sumę czterech cyfr. Metoda szukana pobiera parametr (jakąś cyfrę), a następnie sprawdza czy ta 
+		cyfra jest jedną z czterech. Jeśli jest to metoda zwraca 1, a jeśli nie to zwraca 0. Metoda parzyste
+		zwraca 1 gdy choć jedna liczba z wprowadzonych jest parzysta lub zwraca 0 gdy nie ma liczby 
+		parzystej. Metody szukana i parzyste wywołaj w menu tak samo jak czy_rowne z poprzednim 
+		zadaniu. W funkcji main wywołaj wszystkie metody.
+	*/
 	class algorytmy {
 		private:
 			int liczba1;
@@ -174,22 +199,87 @@ void  zad3(){
 			int liczba3;
 			int liczba4;
 		public:
-		algorytmy(void);
-		~algorytmy(void);
-		int max(void);
-		int mini(void);
-		int suma(void);
-		int szukana(int x);
-		int parzyste(void);
-		void klawiatura(void);
+		algorytmy(void): liczba1(0), liczba2(0), liczba3(0), liczba4(0) {
+			std::cout<<"Konstruktor\n";
+		};
+		
+		~algorytmy(void){
+			std::cout<<"Dekonstruktor\n";
+
+		};
+
+		int max(void){
+			int tab[4] = {liczba1, liczba2, liczba3, liczba4};
+			int max = tab[0];
+			for (int i = 1; i < 4; i++){
+				if (tab[i]>max) max = tab[i];
+			}
+			return max;
+		};
+
+		int mini(void){
+			int tab[4]={liczba1, liczba2, liczba3, liczba4};
+			int min=tab[0];
+			for (int i = 1; i < 4; i++){
+				if (tab[i]<min) min=tab[i];
+			}
+			return min;
+		};
+
+		int suma(void){
+			return (liczba1+liczba2+liczba3+liczba4);
+		}
+
+		int szukana(int x){
+			int tab[4] = {liczba1, liczba2, liczba3, liczba4};
+			bool znaleziono = false;
+			for (int i = 0; i < 4; i++){
+				if (tab[i]==x){
+					znaleziono=true;
+					break;
+				}
+			}
+			return (int) znaleziono;	
+		}
+
+		int parzyste(void){
+			int tab[4] = {liczba1, liczba2, liczba3, liczba4};
+			bool parzyste = false;
+			for (int i = 0; i < 4; i++){
+				if(tab[i]%2==0) {
+					parzyste=true;
+					break;
+				}
+			}
+			return (int) parzyste;
+		}
+
+		void klawiatura(void){
+			liczba1=pobierzInt("Podaj pierwsza liczbe: ");	
+			liczba2=pobierzInt("Podaj druga liczbe: ");	
+			liczba3=pobierzInt("Podaj trzecia liczbe: ");	
+			liczba4=pobierzInt("Podaj czwarta liczbe: ");	
+		}
 	};
-	Mając klasę, uzupełnij metody, wraz z konstruktorem i destruktorem. Metoda klawiatura ma za 
-	zadanie pobrać z klawiatury cztery cyfry potrzebne do wykonania obliczeń. Metoda max zwraca 
-	największą cyfrę z wprowadzonych, metoda mini zwraca najmniejszą cyfrę. Metoda suma zwraca 
-	sumę czterech cyfr. Metoda szukana pobiera parametr (jakąś cyfrę), a następnie sprawdza czy ta 
-	cyfra jest jedną z czterech. Jeśli jest to metoda zwraca 1, a jeśli nie to zwraca 0. Metoda parzyste
-	zwraca 1 gdy choć jedna liczba z wprowadzonych jest parzysta lub zwraca 0 gdy nie ma liczby 
-	parzystej. Metody szukana i parzyste wywołaj w menu tak samo jak czy_rowne z poprzednim 
-	zadaniu. W funkcji main wywołaj wszystkie metody.
-*/
+
+	std::cout<<std::endl;
+	algorytmy a;
+	a.klawiatura();
+	
+	std::cout<<"Najwieksza liczba to: "<<a.max()<<'\n';
+	std::cout<<"Najmniejsza liczba to: "<<a.mini()<<'\n';
+	std::cout<<"Suma tych liczb to: "<<a.suma()<<'\n';
+
+	if (a.parzyste()){
+		std::cout<<"Co najmniej 1 liczba jest parzysta\n";
+	}else{
+		std::cout<<"Brak liczb parzystych\n";
+	}
+
+	if (a.szukana(pobierzInt("Podaj szukana liczbe: "))){
+		std::cout<<"Znaleziono szukana liczbe\n";
+	}else{
+		std::cout<<"Nie znaleziono szukanej liczby\n";
+	}
+	
 }
