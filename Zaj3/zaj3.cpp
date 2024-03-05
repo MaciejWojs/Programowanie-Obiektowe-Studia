@@ -1,6 +1,8 @@
 #include <iostream>
 #include <limits>
 #include <cmath>
+#include <string>
+#include <cstring>
 using string = std::string;
 
 int pobierzInt_zad1(string wiadomosc) {
@@ -23,15 +25,17 @@ int pobierzInt_zad1(string wiadomosc) {
 
 }
 void zad1();
-// void zad2();
+void zad2();
 // void zad3();
 // void zad4();
 // void zad5();
 // void zad6();
 
 int main() {
+    /*
     zad1();
-    // zad2();
+     */
+    zad2();
     // zad3();
     // zad4();
     // zad5();
@@ -58,7 +62,7 @@ void zad1() {
     program tak aby cyfry były tylko z przedziału <0, 9>. Czyli jak użytkownik poda ujemne cyfry to nie
     przyjmie i poprosi o kolejne wpisanie cyfry, jeśli cyfra będzie ponad 10 to też nie przyjmie i poprosi
     o kolejne podanie cyfry. Program będzie tak długo prosił o cyfry dopóki nie dostanie dwóch cyfr
-    z przedziału, wtedy kończy metodę klawiatura. W funkcji main wywołaj metody klawiatura oraz
+    z przedziału, wtedy kończy metodę klawiatura.  funkcji main wywołaj metody klawiatura oraz
     wynik który jest sumą dwóch wprowadzonych cyfr
      */
 
@@ -86,9 +90,77 @@ void zad1() {
         };
     };
 
-
     suma s;
     s.klawiatura();
     std::cout << "Suma podanych liczb: " << s.wynik() << '\n';
+}
+
+
+
+void zad2() {
+
+    /*
+    Napisz program translator, gdzie mamy taką klasę:
+
+    class translator {
+        private:
+            char t[3];
+        public:
+            translator(void);
+            ~translator(void);
+            void pobierz(char *cyfra);
+            int zamien(void);
+    };
+
+    Mając klasę, uzupełnij metody, wraz z konstruktorem i destruktorem. Program translator ma za
+    zadanie przekonwertować cyfrę podaną jako char na typ int. Metoda pobierz pobiera cyfrę dwu
+    znakową typu char. Czyli przekazanie cyfry od 0 do 9 musi być poprzedzone 0 (np. jeśli chcę wpisać
+    8 to wpisuję „08”). Dlatego, że to jest typ znakowy musimy cyfrę wpisywać w cudzysłowie. Jeśli
+    byśmy chcieli wpisać liczbę od 10 do 99 to wpisujemy w cudzysłowie. Translator nie obsługuje liczb
+    ujemnych oraz liczb powyżej 100. Metoda zamien zwraca nam liczbę już przekonwertowaną do int.
+    Tu mamy funkcję pobierz. Wykorzystujemy tu funkcję kopiującą tablice. Do jej poprawnego działania
+    musimy dodać bibliotekę „string.h”
+
+    void translator::pobierz(char *cyfra){
+        strcpy(t, cyfra); //#include <string.h>
+    }
+
+    Tak wygląda funkcja main. Jej zadaniem jest przekonwertowanie cyfry 89 z char na int.
+
+    int main(int argc, char** argv) {
+        translator tr;
+        tr.pobierz("89");
+        cout<<"zamieniona liczba: "<<tr.zamien();
+        return 0;
+    }
+    */
+
+
+    class translator {
+        private:
+        char t[3];
+        public:
+
+        translator(void) : t{} {};
+
+        ~translator() {
+            std::cout << "\n\nDestructor";
+        }
+
+        void pobierz(char* cyfra) {
+            std::strcpy(t, cyfra);
+        }
+
+        int zamien(void) {
+            return std::stoi(t);
+
+        };
+    };
+
+    translator tr;
+    tr.pobierz("89");
+    std::cout << "zamieniona liczba: " << tr.zamien() << '\n';
+    tr.pobierz("07");
+    std::cout << "zamieniona liczba: " << tr.zamien() << '\n';
 
 }
