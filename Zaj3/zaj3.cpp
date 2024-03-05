@@ -42,7 +42,7 @@ int pobierzInt_zad1(string wiadomosc) {
 void zad1();
 void zad2();
 void zad3();
-// void zad4();
+void zad4();
 // void zad5();
 // void zad6();
 
@@ -50,9 +50,9 @@ int main() {
     /*
     zad1();
     zad2();
-     */
     zad3();
-    // zad4();
+     */
+    zad4();
     // zad5();
     // zad6();
 
@@ -236,4 +236,77 @@ void zad3() {
     e.klawiatura();
     std::cout << "Napiecie: " << e.get_u() << "\nNatezenie: " << e.get_i() << '\n';
     std::cout << "Moc wynosi: " << e.moc() << '\n';
+}
+
+void zad4() {
+    /*
+    Napisz kolejną wersję kalkulatora gdzie mamy oto taką klasę:
+
+    class kalkulatorek
+    {
+    private:
+        int *liczba1;
+        int *liczba2;
+    public:
+        kalkulatorek(void);
+        ~kalkulatorek(void);
+        void wczytaj(void);
+        int dodawanie(void);
+        int odejmowanie(void);
+    };
+
+    W klasie kalkulatorek mamy sekcję prywatną gdzie są dwa wskaźniki. W sekcji publicznej mamy
+    konstruktor gdzie tworzymy zmienne dynamiczne i przypisujemy je do wskaźników. W destruktorze
+    musimy pamiętać o usunięciu zmiennych dynamicznych. Metoda wczytaj wypisuje na ekran „podaj
+    pierwszą liczbę” a następnie pobieramy ją. Wypisujemy kolejną wiadomość „podaj drugą liczbę”
+    i wczytujemy drugą liczbę. Metoda dodawanie dodaje dwie cyfry i zwraca wynik. Metoda
+    odejmowanie odejmuje dwie cyfry i zwraca wynik. Funkcja main wygląda w ten sposób:
+
+    int main(int argc, char** argv) {
+        kalkulatorek kal;
+        kal.wczytaj();
+        cout<<"Suma liczb: "<<kal.dodawanie()<<endl;
+        cout<<"Roznica liczb: "<<kal.odejmowanie()<<endl;
+        return 0;
+    }
+    */
+
+    class kalkulatorek {
+        private:
+        int* liczba1;
+        int* liczba2;
+
+        public:
+        kalkulatorek(void) {
+            liczba1 = new int;
+            *liczba1 = 0;
+            liczba2 = new int;
+            *liczba2 = 0;
+            std::cout << "Konstruktor\n\n";
+        }
+
+        ~kalkulatorek(void) {
+            delete liczba1;
+            delete liczba2;
+            std::cout << "\n\nDestruktor";
+        }
+
+        void wczytaj(void) {
+            *liczba1 = pobierzInt("Podaj pierwsza liczbe: ");
+            *liczba2 = pobierzInt("Podaj druga liczbe: ");
+        }
+
+        int dodawanie(void) {
+            return *liczba1 + *liczba2;
+        }
+
+        int odejmowanie(void) {
+            return *liczba1 - *liczba2;
+        }
+    };
+
+    kalkulatorek kal;
+    kal.wczytaj();
+    std::cout << "Suma liczb: " << kal.dodawanie() << std::endl;
+    std::cout << "Roznica liczb: " << kal.odejmowanie() << std::endl;
 }
