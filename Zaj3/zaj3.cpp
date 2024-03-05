@@ -5,6 +5,21 @@
 #include <cstring>
 using string = std::string;
 
+int pobierzInt(string wiadomosc) {
+    int dane;
+    do {
+        std::cout << wiadomosc;
+        std::cin >> dane;
+        if (!std::cin.fail()) {
+            break;
+        }
+        std::cout << "Podano niepoprawne dane!\n";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin.clear();
+    } while (true);
+    return dane;
+}
+
 int pobierzInt_zad1(string wiadomosc) {
     int dane;
     do {
@@ -22,11 +37,11 @@ int pobierzInt_zad1(string wiadomosc) {
         std::cin.clear();
     } while (true);
     return dane;
-
 }
+
 void zad1();
 void zad2();
-// void zad3();
+void zad3();
 // void zad4();
 // void zad5();
 // void zad6();
@@ -34,9 +49,9 @@ void zad2();
 int main() {
     /*
     zad1();
-     */
     zad2();
-    // zad3();
+     */
+    zad3();
     // zad4();
     // zad5();
     // zad6();
@@ -70,8 +85,8 @@ void zad1() {
         private:
         int liczba1;
         int liczba2;
-        public:
 
+        public:
         suma(void) : liczba1(0), liczba2(0) {
             std::cout << "Konstruktor\n\n";
         };
@@ -139,8 +154,8 @@ void zad2() {
     class translator {
         private:
         char t[3];
-        public:
 
+        public:
         translator(void) : t{} {};
 
         ~translator() {
@@ -162,5 +177,63 @@ void zad2() {
     std::cout << "zamieniona liczba: " << tr.zamien() << '\n';
     tr.pobierz("07");
     std::cout << "zamieniona liczba: " << tr.zamien() << '\n';
+}
 
+void zad3() {
+
+    /*
+    Napisz program kalkulator energetyczny, gdzie mamy taką klasę :
+    class energetyka {
+        private:
+            int i;
+            int u;
+        public:
+            energetyka(void);
+            ~energetyka(void);
+            int moc(void);
+            void klawiatura(void);
+            int get_i(void);
+            int get_u(void);
+    };
+
+    Mając klasę, uzupełnij metody, wraz z konstruktorem i destruktorem.Metoda klawiatura ma za
+    zadanie pobrać z klawiatury dwie cyfry potrzebne do wykonania obliczeń. Metoda moc liczy ze wzoru
+    P = i * u(czyli musimy pomnożyć „i” oraz „u”).W funkcji main wywołaj wszystkie metody
+    */
+    class energetyka {
+        private:
+        int i;
+        int u;
+
+        public:
+        energetyka(void) : i(0), u(0) {
+            std::cout << "Konstruktor\n\n";
+        }
+
+        ~energetyka(void) {
+            std::cout << "\n\nDestruktor";
+        }
+
+        int moc(void) {
+            return i * u;
+        }
+
+        void klawiatura(void) {
+            i = pobierzInt("Podaj natezenie pradu: ");
+            u = pobierzInt("Podaj napiecie pradu: ");
+        }
+
+        int get_i(void) {
+            return i;
+        }
+
+        int get_u(void) {
+            return u;
+        }
+    };
+
+    energetyka e;
+    e.klawiatura();
+    std::cout << "Napiecie: " << e.get_u() << "\nNatezenie: " << e.get_i() << '\n';
+    std::cout << "Moc wynosi: " << e.moc() << '\n';
 }
