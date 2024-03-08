@@ -43,7 +43,7 @@ void zad1();
 void zad2();
 void zad3();
 void zad4();
-// void zad5();
+void zad5();
 // void zad6();
 
 int main() {
@@ -51,9 +51,9 @@ int main() {
     zad1();
     zad2();
     zad3();
-     */
     zad4();
-    // zad5();
+     */
+    zad5();
     // zad6();
 
     return 0;
@@ -309,4 +309,130 @@ void zad4() {
     kal.wczytaj();
     std::cout << "Suma liczb: " << kal.dodawanie() << std::endl;
     std::cout << "Roznica liczb: " << kal.odejmowanie() << std::endl;
+}
+
+/*
+    Napisz program stos gdzie mamy taką klasę.
+
+    class stack {
+        private:
+            int n; //rozmiar tablicy
+            int sptr; //wskaźnik stosu
+            int* S; //tablica dynamiczna
+        public:
+            stack(int x); //konstruktor
+            ~stack(); //destruktor
+            bool empty(void); //sprawdzenie czy stos jest pusty
+            int top(void); //zwraca szczyt stosu
+            void push(int v); //zapisuje na stos
+            void pop(void); //usuwanie ze stosu
+    };
+
+    Konstruktor wygląda tak :
+
+    stack::stack(int x) {
+        n = x;
+        S = new int[x];
+        sptr = 0;
+    }
+
+    Sprawdzenie czy stos jest pusty
+
+    bool stack::empty() {
+        return !sptr;
+    }
+
+    Zwraca szczyt stosu
+
+    int stack::top() {
+        if (sptr) return S[sptr - 1];
+        return -n;
+    }
+
+    Zapisuje na stos
+    void stack::push(int v) {
+        if (sptr < n) S[sptr++] = v;
+    }
+
+    Funkcja main wygląda w ten sposób :
+
+    int main(int argc, char** argv) {
+        stack S(10); //tworzymy stos na 10 elementów
+        cout << "ukladamy na stos: " << endl;
+        int i;
+        for (i = 1; i <= 12; i += 2) {
+            cout << i << endl;
+            S.push(i);
+        }
+        cout << endl << endl << "sciagamy ze stosu" << endl;
+        while (!S.empty()) {
+            cout << S.top() << endl;
+            S.pop();
+        }
+        return 0;
+    }
+
+    Napisz program wykorzystujący klasę stack.Funkcja main sprawdza poprawność działania i tworzy
+    stos na 10 elementów.Pętlą for wkładamy kilka cyfr na stos.Następnie pętlą while ściągamy cyfry ze
+    stosu.W metodach należących do stosu, należy zabezpieczyć się przed sytuacją położenia więcej
+    elementów na stos lub ściągnięciu więcej elementów ze stosu.W sytuacji gdy mamy już zapełniony
+    stos nie możemy dodać kolejnego elementu.
+ */
+class stack {
+    private:
+    int n; //rozmiar tablicy
+    int sptr; //wskaźnik stosu
+    int* S; //tablica dynamiczna
+
+    public:
+    stack(int x); //konstruktor
+    ~stack(); //destruktor
+    bool empty(void); //sprawdzenie czy stos jest pusty
+    int top(void); //zwraca szczyt stosu
+    void push(int v); //zapisuje na stos
+    void pop(void); //usuwanie ze stosu
+};
+
+stack::stack(int x) {
+    n = x;
+    S = new int[x];
+    sptr = 0;
+}
+
+stack::~stack() {
+    delete[] S;
+}
+
+bool stack::empty() {
+    return !sptr;
+}
+
+int stack::top() {
+    if (sptr) return S[sptr - 1];
+    return -n;
+}
+
+void stack::push(int v) {
+    if (sptr < n) S[sptr++] = v;
+}
+
+void stack::pop(void) {
+    if (n > sptr && sptr > -1) {
+        S[--sptr] = 0;
+    }
+}
+
+void zad5() {
+    stack S(10); //tworzymy stos na 10 elementów
+    std::cout << "ukladamy na stos: " << std::endl;
+    for (int i = 1; i <= 12; i += 2) {
+        std::cout << i << std::endl;
+        S.push(i);
+    }
+
+    std::cout << std::endl << std::endl << "sciagamy ze stosu" << std::endl;
+    while (!S.empty()) {
+        std::cout << S.top() << std::endl;
+        S.pop();
+    }
 }
