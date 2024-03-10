@@ -44,17 +44,17 @@ void zad2();
 void zad3();
 void zad4();
 void zad5();
-// void zad6();
+void zad6();
 
 int main() {
-    /*
+
     zad1();
     zad2();
     zad3();
     zad4();
-     */
     zad5();
-    // zad6();
+    zad6();
+
 
     return 0;
 }
@@ -435,4 +435,190 @@ void zad5() {
         std::cout << S.top() << std::endl;
         S.pop();
     }
+}
+
+void zad6() {
+    /* Napisz program obsługi liczb zespolonych gdzie mamy dwie klasy.Pierwsza jest
+    odpowiedzialna za wygenerowanie obiektu liczby zespolonej, a druga jest odpowiedzialna za
+    wykonanie operacji na tych liczbach.Na początek wykonajmy klasę która będzie tworzyła nam liczbę
+    zespoloną.
+
+    Oto klasa :
+    class zespolona {
+        private:
+        int re;
+        int im;
+        public:
+        zespolona(void);
+        zespolona(int _re, int _im);
+        ~zespolona(void);
+        void set(int _re, int _im);
+        void set_re(int _re);
+        void set_im(int _im);
+        int get_re(void);
+        int get_im(void);
+    };
+
+    Do podanej wyżej klasy dopisz wszystkie brakujące metody.Następnie wykonajmy klasę
+    która będzie nam oferowała operacje na liczbach zespolonych.Klasa będzie wyglądała w ten sposób :
+
+    class mat {
+        public:
+        mat(void) {}
+        ~mat(void) {}
+        void suma(zespolona* a, zespolona* b);
+        void roznica(zespolona* a, zespolona* b);
+        void wypisz(zespolona* a);
+    };
+
+    Do klasy mat dopisz brakujące metody.Metoda suma oraz roznica pobierają dwie liczby a
+    wynik zwracają pierwszą liczbą(w tym wypadku zmienną „a”).Dla ułatwienia podam sumę części
+    rzeczywistej z metody suma :
+
+    a->set_re(a->get_re() + b->get_re());
+
+    Gdy już obie klasy będą uzupełnione, wykonajmy funkcję main aby przetestować działanie
+    napisanego kodu.
+
+    int main(int argc, char** argv) {
+    //tworzymy pierwszą liczbę zespoloną, wpisujemy 2-część całkowita, 4-część urojona,
+    wypisujemy na ekran
+
+    zespolona liczba1(2, 4);
+    cout << "liczba 1: " << liczba1.get_re() << "+" << liczba1.get_im() << "i" << endl;
+
+    //tworzymy drugą liczbę zespoloną, wpisujemy 3-część całkowita, 5-część urojona, wypisujemy na ekran
+
+    zespolona liczba2;
+    liczba2.set(3, 5);
+    cout << "liczba 2: " << liczba2.get_re() << "+" << liczba2.get_im() << "i" << endl;
+
+    //tworzymy obiekt na którym będziemy wywoływać operacje matematyczne
+    mat operacja;
+
+    //dodajemy dwie liczby zespolone a wynik zwracamy w liczba1, wypisujemy na ekran wynik
+    operacja.suma(&liczba1, &liczba2);
+    cout << "suma liczb: " << liczba1.get_re() << "+" << liczba1.get_im() << "i" << endl << endl;
+
+    //tworzymy zmienne dynamiczne
+    //tworzymy trzecią liczbę zespoloną, wpisujemy 1-część całkowita, 1-część urojona, wypisujemy na ekran
+    zespolona* liczba3 = new zespolona(1, 1);
+    cout << "liczba 3: " << liczba3->get_re() << "+" << liczba3->get_im() << "i" << endl;
+
+    //tworzymy czwartą liczbę zespoloną, wpisujemy 5-część całkowita, 4-część urojona, wypisujemy na ekran
+    zespolona* liczba4 = new zespolona;
+    liczba4->set(5, 4);
+    cout << "liczba 4: " << liczba4->get_re() << "+" << liczba4->get_im() << "i" << endl;
+
+    //odejmujemy dwie liczby zespolone
+    operacja.roznica(liczba3, liczba4);
+
+    //wypisujemy wynik
+    cout << "roznica liczb: ";
+    operacja.wypisz(liczba3);
+    cout << endl << endl;
+
+    //usuwamy liczba3 i liczba4 z pamięci
+    delete liczba3;
+    delete liczba4;
+ */
+
+    class zespolona {
+        private:
+        int re;
+        int im;
+        public:
+        zespolona(void) : re(0), im(0) {
+            std::cout << "(zespolona) Konstruktor bez argumentowy\n\n";
+        };
+
+        zespolona(int _re, int _im) : re(_re), im(_im) {
+            std::cout << "(zespolona) Konstruktor z argumentami\n\n";
+        };
+
+        ~zespolona(void) {
+            std::cout << "\n\n(zespolona) Dekonstruktor";
+        };
+
+        void set(int _re, int _im) {
+            re = _re;
+            im = _im;
+        };
+
+        void set_re(int _re) {
+            re = _re;
+        };
+
+        void set_im(int _im) {
+            im = _im;
+        };
+
+        int get_re(void) {
+            return re;
+        };
+
+        int get_im(void) {
+            return im;
+        };
+    };
+
+    class mat {
+        public:
+        mat(void) {
+            std::cout << "Konstruktor klasy mat\n\n";
+        }
+
+        ~mat(void) {
+            std::cout << "\n\nDekonstruktor klasy mat";
+        }
+
+        void suma(zespolona* a, zespolona* b) {
+            a->set_im(a->get_im() + b->get_im());
+            a->set_re(a->get_re() + b->get_re());
+        };
+
+        void roznica(zespolona* a, zespolona* b) {
+            a->set_im(a->get_im() - b->get_im());
+            a->set_re(a->get_re() - b->get_re());
+        };
+
+        void wypisz(zespolona* a) {
+            string znak = "\0";
+            if (a->get_im() < 0) {
+                znak = '-';
+            } else {
+                znak = '+';
+            }
+
+            std::cout << a->get_re() << znak << a->get_im() << 'i';
+        };
+    };
+
+    zespolona liczba1(2, 4);
+    std::cout << "liczba 1: " << liczba1.get_re() << "+" << liczba1.get_im() << "i" << std::endl;
+
+    zespolona liczba2;
+    liczba2.set(3, 5);
+    std::cout << "liczba 2: " << liczba2.get_re() << "+" << liczba2.get_im() << "i" << std::endl;
+
+    mat operacja;
+
+    operacja.suma(&liczba1, &liczba2);
+    std::cout << "suma liczb: " << liczba1.get_re() << "+" << liczba1.get_im() << "i" << std::endl << std::endl;
+
+    zespolona* liczba3 = new zespolona(1, 1);
+    std::cout << "liczba 3: " << liczba3->get_re() << "+" << liczba3->get_im() << "i" << std::endl;
+
+    zespolona* liczba4 = new zespolona;
+    liczba4->set(5, 4);
+    std::cout << "liczba 4: " << liczba4->get_re() << "+" << liczba4->get_im() << "i" << std::endl;
+
+    operacja.roznica(liczba3, liczba4);
+
+    std::cout << "roznica liczb: ";
+    operacja.wypisz(liczba3);
+    std::cout << std::endl << std::endl;
+
+    delete liczba3;
+    delete liczba4;
 }
