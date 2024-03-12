@@ -13,9 +13,9 @@ void zad5();
 void zad6();
 
 int main() {
-    zad1();
+    zad2();
     /*
-        zad2();
+        zad1();
         zad3();
         zad4();
         zad5();
@@ -97,4 +97,145 @@ void zad1() {
     std::cin >> cen;
     koszt ksiazka(cen);
     std::cout << "Cena brutto: " << ksiazka.brutto() << std::endl;
+}
+
+void zad2() {
+    /*
+    Jest napisany program do wyliczania mocy.Mechanizm wyliczania jest zawarty w klasie
+    „moc”.Mamy tam 4 konstruktory.Uzupełnij brakujące metody o ciało. Klasa wygląda w ten sposób :
+
+    class moc {
+        private:
+        int volt;
+        double amper;
+        double wat;
+        void wylicz(void) { wat = volt * amper; }
+        public:
+        moc() : volt(0), amper(0.0), wat(0.0) {} //konstruktor 1
+        moc(int a) : volt(a), amper(0.0) { wylicz(); } //konstruktor 2
+        moc(double a) : volt(230), amper(a) { wylicz(); } //konstruktor 3
+        moc(int a, double b) : volt(a), amper(b) { wylicz(); } //konstruktor 4
+        ~moc(void) {}
+        void set_volt(int a) { volt = a; }
+        void set_amper(int a);
+        double get_wat(void);
+    };
+
+    Funkcja main działającego program wygląda w ten sposób :
+    int main(int argc, char** argv) {
+        int v;
+        double a;
+        cout << "Moc silnika" << endl;
+        cout << "Podaj napiecie: ";
+        cin >> v;
+        cout << "Podaj prad: ";
+        cin >> a;
+        moc silnik(v, a);
+        cout << "Moc silnika to: " << silnik.get_wat() << "W" << endl;
+        cout << endl << "Moc zarowki" << endl;
+        cout << "Podaj napiecie: ";
+        cin >> v;
+        cout << "Podaj prad: ";
+        cin >> a;
+        moc zarowka(a);
+        cout << "Moc zarowki to: " << zarowka.get_wat() << "W" << endl;
+        cout << endl << "Moc komputera" << endl;
+        cout << "Podaj napiecie: ";
+        cin >> v;
+        cout << "Podaj prad: ";
+        cin >> a;
+        moc komp(v);
+        cout << "Moc komputera to: " << komp.get_wat() << "W" << endl;
+        cout << endl << "Moc TV" << endl;
+        cout << "Podaj napiecie: ";
+        cin >> v;
+        cout << "Podaj prad: ";
+        cin >> a;
+        moc tv;
+        cout << "Moc TV to: " << tv.get_wat() << "W" << endl;
+    }
+
+    Zastanów się i uzupełnij tabelkę który konstruktor jest wywoływany
+    Obiekt:     Konstruktor:
+    silnik      konstruktor 4
+    zarowka     konstruktor 3
+    komp        konstruktor 2
+    tv          konstruktor 1
+    */
+    class moc {
+        private:
+        int volt;
+        double amper;
+        double wat;
+        void wylicz(void) { wat = volt * amper; }
+
+        public:
+        moc() : volt(0), amper(0.0), wat(0.0) {}; //konstruktor 1
+
+        moc(int a) : volt(a), amper(0.0) {
+            wylicz();
+            //konstruktor 2
+        };
+
+        moc(double a) : volt(230), amper(a) {
+            wylicz();
+            //konstruktor 3
+        };
+
+        moc(int a, double b) : volt(a), amper(b) {
+            wylicz();
+            //konstruktor 4
+        };
+
+        ~moc(void) {
+            std::cout << "\n\nDestruktor";
+        };
+
+        void set_volt(int a) {
+            volt = a;
+        }
+
+        void set_amper(int a) {
+            amper = a;
+        };
+
+        double get_wat(void) {
+            wylicz();
+            return wat;
+        };
+    };
+    int v;
+    double a;
+    std::cout << "Moc silnika" << std::endl;
+    std::cout << "Podaj napiecie: ";
+    std::cin >> v;
+    std::cout << "Podaj prad: ";
+    std::cin >> a;
+
+    moc silnik(v, a);
+    std::cout << "Moc silnika to: " << silnik.get_wat() << "W" << std::endl;
+    std::cout << std::endl << "Moc zarowki" << std::endl;
+    std::cout << "Podaj napiecie: ";
+    std::cin >> v;
+    std::cout << "Podaj prad: ";
+    std::cin >> a;
+
+    moc zarowka(a);
+    std::cout << "Moc zarowki to: " << zarowka.get_wat() << "W" << std::endl;
+    std::cout << std::endl << "Moc komputera" << std::endl;
+    std::cout << "Podaj napiecie: ";
+    std::cin >> v;
+    std::cout << "Podaj prad: ";
+    std::cin >> a;
+
+    moc komp(v);
+    std::cout << "Moc komputera to: " << komp.get_wat() << "W" << std::endl;
+    std::cout << std::endl << "Moc TV" << std::endl;
+    std::cout << "Podaj napiecie: ";
+    std::cin >> v;
+    std::cout << "Podaj prad: ";
+    std::cin >> a;
+
+    moc tv;
+    std::cout << "Moc TV to: " << tv.get_wat() << "W" << std::endl;
 }
