@@ -13,14 +13,14 @@ void zad5();
 void zad6();
 
 int main() {
-    /*
+
     zad1();
     zad2();
     zad3();
     zad4();
-    zad6();
-    */
     zad5();
+    zad6();
+
     return 0;
 }
 
@@ -536,4 +536,52 @@ void zad5() {
         S.pobierz();
     while (S.koniec());
     std::cout << "Suma wprowadzonych liczb to: " << S.suma();
+}
+
+void zad6() {
+    /*
+    Napisz program na podstawie klasy z zadania 5 tak aby pobierał cyfry z klawiatury a
+    następnie liczba 0 kończy wczytywanie z klawiatury (tak samo jak w zadaniu 5). Jednak chcę aby
+    wypisać sumę liczb parzystych oraz sumę liczb nieparzystych.
+    */
+
+    class sumowanie {
+        private:
+        int sum_p, sum_n;
+        public:
+        sumowanie() : sum_p(0), sum_n(0) {
+            std::cout << "Konstruktor\n\n";
+        };
+
+        void pobierz() {
+            int temp;
+            int a = 1;
+            do {
+                std::cout << "Liczba " << a << ": ";
+                std::cin >> temp;
+                if (temp & 1) {
+                    sum_n += temp;
+                } else {
+                    sum_p += temp;
+                }
+
+                a++;
+            } while (temp != 0);
+
+        }
+
+        int suma_parzystych() {
+            return sum_p;
+        }
+
+        int suma_nieparzystych() {
+            return sum_n;
+        }
+    };
+
+    sumowanie S;
+    std::cout << "Wpisz liczbe do zsumowania\n(0 konczy proces wprowadzania)\n";
+    S.pobierz();
+    std::cout << "Suma wprowadzonych liczb parzystych to: " << S.suma_parzystych() << '\n';
+    std::cout << "Suma wprowadzonych liczb nieparzystych to: " << S.suma_nieparzystych();
 }
