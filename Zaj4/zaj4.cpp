@@ -13,14 +13,14 @@ void zad5();
 void zad6();
 
 int main() {
-    zad4();
     /*
     zad1();
     zad2();
     zad3();
-    zad5();
+    zad4();
     zad6();
     */
+    zad5();
     return 0;
 }
 
@@ -460,4 +460,80 @@ void zad4() {
     kalkulator<double> moje; //(2)
     moje.klawiatura();
     std::cout << "roznica " << moje.odejmowanie() << std::endl;
+}
+
+void zad5() {
+    /*
+        Program ma za zadanie zliczać cyfry podane z klawiatury przez użytkownika.Program
+        pobiera cyfry i zlicza sumę tak długo aż użytkownik poda cyfrę zero.Cyfra zero kończy pobieranie cyfr
+        i wyświetla sumę.Program został napisany w funkcji main, natomiast cała logika programu jest
+        zawarta w klasie o nazwie „sumator”.Funkcja main jest bardzo prosta i wygląda w ten sposób :
+
+        int main(int argc, char** argv) {
+            sumator S;
+            cout << "Program sumuje liczby, liczba 0 konczy sumowanie" << endl;
+            do
+                S.pobierz();
+            while (S.koniec());
+            cout << "Suma wprowadzonych liczb to: " << S.suma();
+            return 0;
+        }
+
+        Ciała metod klasy sumator wyglądają w ten sposób :
+        void sumator::pobierz(void) {
+            int temp;
+            cout << "Wpisz liczbe aby ja dodac: ";
+            cin >> temp;
+            if (temp == 0)
+                _koniec = 0;
+            else
+                _suma += temp;
+        }
+
+        int sumator::koniec(void) {
+            return _koniec;
+        }
+
+        int sumator::suma(void) {
+            return _suma;
+        }
+
+        Dopisz brakującą część programu czyli uzupełnij klasę sumator :
+        class sumator {
+            private:
+            public:
+        }
+     */
+    class sumator {
+        private:
+        int _suma, _koniec;
+        public:
+
+        sumator() : _suma(0), _koniec(1) {};
+
+        void pobierz(void) {
+            int temp;
+            std::cout << "Wpisz liczbe aby ja dodac: ";
+            std::cin >> temp;
+            if (temp == 0)
+                _koniec = 0;
+            else
+                _suma += temp;
+        }
+
+        int koniec(void) {
+            return _koniec;
+        }
+
+        int suma(void) {
+            return _suma;
+        }
+    };
+
+    sumator S;
+    std::cout << "Program sumuje liczby, liczba 0 konczy sumowanie" << std::endl;
+    do
+        S.pobierz();
+    while (S.koniec());
+    std::cout << "Suma wprowadzonych liczb to: " << S.suma();
 }
