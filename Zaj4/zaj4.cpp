@@ -71,7 +71,6 @@ void zad1() {
         int podatek;
 
         public:
-        koszt() : cena(0), podatek(0) {};
         koszt(double c, int p = 23) : cena(c), podatek(p) {};
 
         ~koszt() {
