@@ -10,11 +10,10 @@ void zad5();
 void zad6();
 
 int main() {
-  std::cout << "cokolwiek";
-  zad2();
+  zad3();
   /*
   zad1();
-  zad3();
+  zad2();
   zad4();
   zad5();
   zad6();
@@ -43,7 +42,6 @@ void zad1() {
   ilość samochodów w rodzinie. Zmienna „liosc” musi być wyzerowana na początku programu. Aby coś
   wpisać do zmiennej należy zrobić to po za ciałem klasy (pod klasą). Przepisz klasę oraz uzupełnij
   metodę „get_ilosc”:
-
   class samochod
   {
   private:
@@ -262,7 +260,128 @@ void zad2() {
   std::cout << "Mamy na wspolnym koncie bankowym " << dziecko.stan_konta() << "zl" << std::endl;
 };
 
-void zad3();
+class sprzedaz {
+private:
+  static double utarg;
+public:
+  sprzedaz(void) {
+    // std::cout << "Konstruktor\n\n";
+  }
+
+  ~sprzedaz(void) {
+    std::cout << "\nDekonstruktor";
+
+  }
+
+  void wystawParagon(double x) {
+    utarg += x;
+  };
+
+  static double raport(void) {
+    return utarg;
+  };
+};
+
+double sprzedaz::utarg = 100.12;
+
+void zad3() {
+  /*
+  Napisz program który symuluje sprzedaż sklepiku osiedlowego. Na początku mamy klasę
+  sprzedaż. Gdzie mamy pole statyczne „utarg”, statyczną metodę raport oraz zwykłą metodę
+  wystawParagon. Pole utarg jest zainicjalizowany cyfrą 100.12 (tyle zostało pieniędzy w kasie z
+  poprzedniego dnia). Następnie mamy metodę „wystawParagon” która kwotę podaną jako argument
+  dodaje do utargu. Druga metoda jest statyczna i nazywa się utarg. Jest to metoda odpowiedzialna za
+  zwracanie kwoty utargu (kwoty pieniędzy w kasie). Metody statyczne mogą działać tylko na
+  zmiennych statycznych (nie ma dostępu do zmiennych niestatycznych), ale dzięki temu możemy je
+  wywołać jeszcze przed utworzeniem pierwszego obiektu. Oczywiście też możemy wywoływać
+  metodę na każdym obiekcie i zwróci nam to samo. Implementacja metody „raport” po za ciałem
+  klasy już nie używa specyfikatora „static”. Uzupełnij brakujące ciała metod do klasy „sprzedaz” która
+  wygląda w ten sposób:
+
+  class sprzedaz
+  {
+  private:
+   static double utarg;
+  public:
+   sprzedaz(void) {}
+   ~sprzedaz(void) {}
+
+   void wystawParagon(double x);
+   static
+    double raport(void);
+  };
+
+  Po uzupełnieniu klasy teraz możemy zasymulować działanie programu:
+  int main(int argc, char** argv) {
+   //nowy dzien, sprawdzmy czy mamy jakis utarg z wczoraj
+   cout<<"Utarg na poczatku dnia "<<sprzedaz::raport()<<endl;  //(1)
+
+   //sprzedajemy jablka
+   sprzedaz jablka;
+   jablka.wystawParagon(20.23);
+   cout<<"Sprzedane jablka za kwote 20.23zl"<<endl;
+
+   //sprzedajemy kiwi
+   sprzedaz kiwi;
+   kiwi.wystawParagon(48.69);
+   cout<<"Sprzedane kiwi za kwote 48.69zl"<<endl;
+
+   //zobaczmy ile mamy pieniedzy w kasie
+   cout<<"Utarg w dniu "<<sprzedaz::raport()<<endl;   //(2)
+
+   //sprzedajemy arbuza
+   sprzedaz arbuz;
+   arbuz.wystawParagon(8.94);
+   cout<<"Sprzedane arbuzy za kwote 8.94zl"<<endl;
+
+   //sprzedajemy winogrono
+   sprzedaz winogrono;
+   winogrono.wystawParagon(55.09);
+   cout<<"Sprzedane kiwi za kwote 55.09zl"<<endl;
+
+   //zobaczmy ile mamy pieniedzy w kasie
+   cout<<"Utarg w dniu "<<kiwi.raport()<<endl;    //(3)
+  }
+
+  Linijka z komentarzem (1) ukazuje nam bardzo ważną cechę statycznych metod i pól. Zobaczmy że
+  wywołaliśmy metodę „raport” a jeszcze nie mamy utworzonego żądnego obiektu. Oczywiście ta
+  metoda działa na statycznym polu „utarg”. Zobacz że do wywołania metody statycznej trzeba napisać
+  nazwę klasy i dwa dwukropki (operator zakresu widoczności) „sprzedaz::”. Mając już utworzony
+  obiekt też można posłużyć się taka konstrukcją. Pokazuje to linijka z komentarzem (2). Oczywiście
+  mając kilka utworzonych obiektów możemy wywołać metodę na obojętnie którym obiekcie (we
+  wszystkich przypadkach dostaniemy ten sam wynik bo działamy na polu statycznym). Pokazuje to
+  linijka z komentarzem (3). Poniżej mamy zdjęcie z działającego programu.
+  */
+
+  std::cout << "Utarg na poczatku dnia " << sprzedaz::raport() << std::endl;  //(1)
+
+  //sprzedajemy jablka
+  sprzedaz jablka;
+  jablka.wystawParagon(20.23);
+  std::cout << "Sprzedane jablka za kwote 20.23zl" << std::endl;
+
+  //sprzedajemy kiwi
+  sprzedaz kiwi;
+  kiwi.wystawParagon(48.69);
+  std::cout << "Sprzedane kiwi za kwote 48.69zl" << std::endl;
+
+  //zobaczmy ile mamy pieniedzy w kasie
+  std::cout << "Utarg w dniu " << sprzedaz::raport() << std::endl;   //(2)
+
+  //sprzedajemy arbuza
+  sprzedaz arbuz;
+  arbuz.wystawParagon(8.94);
+  std::cout << "Sprzedane arbuzy za kwote 8.94zl" << std::endl;
+
+  //sprzedajemy winogrono
+  sprzedaz winogrono;
+  winogrono.wystawParagon(55.09);
+  std::cout << "Sprzedane kiwi za kwote 55.09zl" << std::endl;
+
+  //zobaczmy ile mamy pieniedzy w kasie
+  std::cout << "Utarg w dniu " << kiwi.raport() << std::endl;    //(3)
+}
+
 void zad4();
 void zad5();
 void zad6();
