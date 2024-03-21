@@ -10,14 +10,14 @@ void zad5();
 void zad6();
 
 int main() {
-  zad3();
   /*
   zad1();
   zad2();
-  zad4();
+  zad3();
   zad5();
   zad6();
   */
+  zad4();
 }
 
 class samochod {
@@ -381,7 +381,102 @@ void zad3() {
   //zobaczmy ile mamy pieniedzy w kasie
   std::cout << "Utarg w dniu " << kiwi.raport() << std::endl;    //(3)
 }
+class prostokat {
+private:
+  int bok1;
+  int bok2;
 
-void zad4();
+public:
+  prostokat(int x, int y) : bok1(x), bok2(y) {}
+
+  ~prostokat(void) {
+    std::cout << "\nDekonstruktor";
+  }
+
+  int get_bok1(void) {
+    return bok1;
+  };
+
+  int get_bok2(void) {
+    return bok2;
+
+  }
+
+  void wymiary(void) {
+    std::cout << bok1 << "m x " << bok2 << "m" << std::endl;
+  }
+};
+
+int obwod(prostokat& p) {
+  return 2 * p.get_bok1() + 2 * p.get_bok2();
+}
+
+int pole(prostokat& p) {
+  return p.get_bok1() * p.get_bok2();
+}
+
+void klawiatura(int& a, int& b) {
+  std::cout << "Podaj pierwszy wymiar: ";
+  std::cin >> a;
+  std::cout << "Podaj drugi wymiar: ";
+  std::cin >> b;
+}
+
+void zad4() {
+  /*
+  Napisz który liczy długość płotu oraz wielkość działki jaką mam.
+  Na początku mamy taką klasę :
+
+  class prostokat {
+  private:
+    int bok1;
+    int bok2;
+  public:
+    prostokat(int x, int y) : bok1(x), bok2(y) {}
+    ~prostokat(void) {}
+    int get_bok1(void);
+    int get_bok2(void);
+    void wymiary(void);
+  };
+
+  Uzupełnij klasę o brakujące ciała metod.Metoda wymiary ma wyświetlić wymiary działki w ten
+  sposób : „{ std::cout << bok1 << "m x " << bok2 << "m" << std::endl; }”
+  Oprócz klasy mamy trzy funkcje takie jak :
+
+  int obwod(prostokat& p)
+  int pole(prostokat& p)
+  void klawiatura(int& a, int& b)
+
+  Uzupełnij funkcje o ciało. Dla podpowiedzi funkcja pole wygląda w ten sposób :
+  {
+    return p.get_bok1() * p.get_bok2();
+  }
+
+  Sprawdźmy czy funkcja main działa poprawnie :
+
+  int main(int argc, char** argv) {
+    int x, y;
+    klawiatura(x, y);
+
+    prostokat dzialka(x, y);
+    std::cout << std::endl << "Masz dzialke o wymiarach: ";
+    dzialka.wymiary();
+
+    std::cout << "Dlugosc plotu to " << obwod(dzialka) << "m" << std::endl;
+    std::cout << "Pole dzialki to " << pole(dzialka) << "m^2" << std::endl;
+  }
+  */
+
+  int x, y;
+  klawiatura(x, y);
+
+  prostokat dzialka(x, y);
+  std::cout << std::endl << "Masz dzialke o wymiarach: ";
+  dzialka.wymiary();
+
+  std::cout << "Dlugosc plotu to " << obwod(dzialka) << "m" << std::endl;
+  std::cout << "Pole dzialki to " << pole(dzialka) << "m^2" << std::endl;
+}
+
 void zad5();
 void zad6();
