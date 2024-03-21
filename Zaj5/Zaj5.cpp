@@ -14,10 +14,10 @@ int main() {
   zad1();
   zad2();
   zad3();
-  zad5();
+  zad4();
   zad6();
   */
-  zad4();
+  zad5();
 }
 
 class samochod {
@@ -477,6 +477,64 @@ void zad4() {
   std::cout << "Dlugosc plotu to " << obwod(dzialka) << "m" << std::endl;
   std::cout << "Pole dzialki to " << pole(dzialka) << "m^2" << std::endl;
 }
+class zespolona {
+private:
+  int re;
+  int im;
+public:
+  zespolona(int x, int y) : re(x), im(y) {}
+  ~zespolona(void) {
+    std::cout << "\nDestruktor";
+  }
 
-void zad5();
+  friend void wypisz(zespolona& z);
+  friend void dodaj(zespolona& z1, zespolona& z2);
+};
+
+void wypisz(zespolona& z) {
+  std::cout << z.re << "+" << z.im << "i" << std::endl;
+}
+
+void dodaj(zespolona& z1, zespolona& z2) {
+  zespolona z3(z1.re + z2.re, z1.im + z2.im);
+  wypisz(z3);
+}
+
+void zad5() {
+  /*
+  Napisz program który tworzy liczbę zespoloną i wypisuje ją na ekran.Klasa ma tylko
+  konstruktor i destruktor.Oprócz tego napisz funkcję która ma dostęp do prywatnych elementów.
+  Klasa wygląda w ten sposób :
+
+  class zespolona {
+  private:
+    int re;
+    int im;
+  public:
+    zespolona(int x, int y) : re(x), im(y) {}
+    ~zespolona(void) {}
+
+    friend void wypisz(zespolona& z);
+  };
+
+  Zadeklarowaliśmy funkcję wypisz w klasie zespolona.Jednakże aby ona miała dostęp do prywatnych
+  elementów musimy dać specyfikator „friend”, oznaczający że funkcja przyjaźni się z klasą.Należy
+  zwrócić szczególną uwagę na jedną rzecz.Jeśli funkcja lub klasa jest przyjazna z inną klasą musi
+  pobierać referencje z utworzonego obiektu(aby mogła dostać się do prywatnych i publicznych
+  elementów).Pod spodem mamy funkcję :
+
+  void wypisz(zespolona & z) {
+    std::cout << z.re << "+" << z.im << "i" << std::endl;
+  }
+ */
+
+  zespolona z1(3, 4);
+  wypisz(z1);
+  zespolona z2(12, 1);
+  wypisz(z2);
+
+  std::cout << "Dodawanie: \n";
+  dodaj(z1, z2);
+}
+
 void zad6();
