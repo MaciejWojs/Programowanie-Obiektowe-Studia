@@ -10,14 +10,14 @@ void zad5();
 void zad6();
 
 int main() {
-  /*
+
   zad1();
   zad2();
   zad3();
   zad4();
-  zad6();
-  */
   zad5();
+  zad6();
+
 }
 
 class samochod {
@@ -537,4 +537,56 @@ void zad5() {
   dodaj(z1, z2);
 }
 
-void zad6();
+class prostokat2 {
+private:
+  int bok1;
+  int bok2;
+
+public:
+  prostokat2(int x, int y) : bok1(x), bok2(y) {}
+
+  ~prostokat2(void) {
+    std::cout << "\nDekonstruktor";
+  }
+
+  void wymiary(void) {
+    std::cout << bok1 << "m x " << bok2 << "m" << std::endl;
+  }
+
+  friend int obwod2(prostokat2& p);
+  friend int pole2(prostokat2& p);
+};
+
+int obwod2(prostokat2& p) {
+  return 2 * p.bok1 + 2 * p.bok2;
+}
+
+int pole2(prostokat2& p) {
+  return p.bok1 * p.bok2;
+}
+
+void klawiatura2(int& a, int& b) {
+  std::cout << "Podaj pierwszy wymiar: ";
+  std::cin >> a;
+  std::cout << "Podaj drugi wymiar: ";
+  std::cin >> b;
+}
+
+void zad6() {
+  /*
+  Jak zauważyliśmy w zadaniu 4 brakowało nam jakiegoś mechanizmy aby dostać się do
+  elementów prywatnych klasy. Zmodyfikuj tak funkcje „obwod” i „pole” aby były przyjazne z klasą
+  „prostokat”. Usuń metody „get_bok1” i „get_bok2” bo już nie są potrzebne. Funkcja klawiatura
+  zostaje bez zmian, funkcja main też zostaje bez zmian.
+  */
+
+  int x, y;
+  klawiatura(x, y);
+
+  prostokat2 dzialka(x, y);
+  std::cout << std::endl << "Masz dzialke o wymiarach: ";
+  dzialka.wymiary();
+
+  std::cout << "Dlugosc plotu to " << obwod2(dzialka) << "m" << std::endl;
+  std::cout << "Pole dzialki to " << pole2(dzialka) << "m^2" << std::endl;
+}
