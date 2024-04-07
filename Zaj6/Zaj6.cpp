@@ -10,14 +10,14 @@ void zad5();
 void zad6();
 
 int main() {
-  zad3();
   /*
   zad1();
   zad2();
-  zad4();
+  zad3();
   zad5();
   zad6();
    */
+  zad4();
 }
 
 class osoba {
@@ -191,4 +191,54 @@ void zad3() {
   PKO(Adam);
   std::cout << "Srodki Adama na koncie: " << Adam.sprawdz_srodki() << "zl." << std::endl;
   std::cout << "Lokata w wyskokosci: " << Adam.sprawdz_procent() << "%" << std::endl;
+}
+
+class zakres;
+class punkt {
+private:
+  int x;
+public:
+  punkt(void) :punkt(0) {}
+  punkt(int z) : x(z) {}
+  ~punkt(void) {}
+  void podaj(void) {
+    std::cout << "Podaj punkt: ";
+    std::cin >> x;
+  }
+
+  friend void zbadaj(zakres& z, punkt& p);
+};
+
+class zakres {
+private:
+  int x;
+  int y;
+public:
+  zakres(void) : zakres(0, 0) {}
+  zakres(int a, int b) : x(a), y(b) {}
+  ~zakres(void) {}
+  void podaj(void) {
+    std::cout << "Podaj poczatek zakresu: ";
+    std::cin >> x;
+    std::cout << "Podaj koniec zakresu: ";
+    std::cin >> y;
+  }
+  friend void zbadaj(zakres& z, punkt& p);
+};
+
+void zbadaj(zakres& z, punkt& p) {
+  if ((z.x <= p.x) && (z.y >= p.x))
+    std::cout << "punkt miesci sie w zakresie " << std::endl;
+  else
+    std::cout << "punkt nie miesci sie w zakresie " << std::endl;
+}
+
+void zad4() {
+  punkt p;
+  zakres z;
+
+  z.podaj();
+  p.podaj();
+
+  zbadaj(z, p);
 }
