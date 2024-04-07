@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+#include <istream>
+#include <ostream>
 using string = std::string;
 
 void zad1();
@@ -15,9 +17,9 @@ int main() {
   zad2();
   zad3();
   zad4();
-  zad6();
-   */
   zad5();
+   */
+  zad6();
 }
 
 class osoba {
@@ -298,4 +300,53 @@ void zad5() {
 
   std::cout << "Wyliczone pole wynosi: " << in.licz_pole(kw) << std::endl;
   std::cout << "Wyliczony obwod wynosi: " << in.licz_obwod(kw) << std::endl;
+}
+
+class czworokat {
+private:
+  int bok1;
+  int bok2;
+  int bok3;
+  int bok4;
+
+public:
+  czworokat(void) : bok1(0), bok2(0), bok3(0), bok4(0) {}
+  ~czworokat(void) {}
+
+  friend std::istream& operator>>(std::istream& i, czworokat& cz); //dla cin 
+  friend std::ostream& operator<<(std::ostream& o, czworokat& cz); //dla cout 
+};
+
+std::istream& operator>>(std::istream& i, czworokat& cz) {
+  std::cout << "Podaj pierwszy bok: ";
+  i >> cz.bok1;
+  std::cout << "Podaj drugi bok: ";
+  i >> cz.bok2;
+  std::cout << "Podaj trzeci bok: ";
+  i >> cz.bok3;
+  std::cout << "Podaj czwarty bok: ";
+  i >> cz.bok4;
+  return i;
+}
+std::ostream& operator<<(std::ostream& o, czworokat& cz) {
+  o << cz.bok1 << " x " << cz.bok2 << " x " << cz.bok3 << " x " << cz.bok4 << std::endl;
+  return o;
+}
+
+void zad6() {
+  czworokat figura;
+  std::cin >> figura;
+  std::cout << "Czworokat o bokach: " << figura;
+
+  czworokat tab[10];
+  for (int i = 0; i < 10; i++) {
+    std::cout << "Wprowadzanie do elementu: " << i << '\n';
+    std::cin >> tab[i];
+  }
+
+  std::cout << std::endl;
+
+  for (int i = 0; i < 10; i++) {
+    std::cout << "Odczytywanie z elementu: " << i << '\n' << tab[i];
+  }
 }
