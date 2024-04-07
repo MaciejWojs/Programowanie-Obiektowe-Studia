@@ -10,10 +10,10 @@ void zad5();
 void zad6();
 
 int main() {
-  zad2();
+  zad3();
   /*
   zad1();
-  zad3();
+  zad2();
   zad4();
   zad5();
   zad6();
@@ -95,8 +95,9 @@ void student::wyswietl(void) {
 
 void zad2() {
   student klasa_I[2];
-  for (int i = 0; i < 2; i++)
+  for (int i = 0; i < 2; i++) {
     klasa_I[i].wyswietl();
+  }
 
   std::cout << std::endl << std::endl;
 
@@ -111,11 +112,83 @@ void zad2() {
 
   /*
   Tabela, pozycja konstruktor
-Tabela: klasa_I, pozycja: 0        konstruktor 1
-Tabela: klasa_I, pozycja: 1        konstruktor 1
-Tabela: klasa_II, pozycja: 0       konstruktor 2
-Tabela: klasa_II, pozycja: 1       konstruktor 3
-Tabela: klasa_II, pozycja: 2       konstruktor 1
-Tabela: klasa_II, pozycja: 3       konstruktor 1
+  Tabela: klasa_I, pozycja: 0        konstruktor 1
+  Tabela: klasa_I, pozycja: 1        konstruktor 1
+  Tabela: klasa_II, pozycja: 0       konstruktor 2
+  Tabela: klasa_II, pozycja: 1       konstruktor 3
+  Tabela: klasa_II, pozycja: 2       konstruktor 1
+  Tabela: klasa_II, pozycja: 3       konstruktor 1
   */
+}
+
+class konto {
+private:
+  double stan;
+  double procent;
+public:
+  konto(void) : stan(0), procent(0) {};
+
+  void wplata(double x) {
+    stan += x;
+  }
+
+  int wyplata(double x);
+  double sprawdz_srodki(void) {
+    return stan;
+  }
+
+  void ustaw_procent(double p = 0.05) {
+    procent = p;
+  }
+
+  double sprawdz_procent(void) {
+    return procent;
+  };
+
+  void lokata_miesieczna(void);
+};
+
+int konto::wyplata(double x) {
+  if (stan >= x) {
+    stan -= x;
+    return 1;
+  } else
+    return 0;
+}
+
+void konto::lokata_miesieczna(void) {
+  stan = stan + ((stan * procent) / 100);
+}
+
+void PKO(konto& k) {
+  double temp;
+  std::cout << std::endl << "-------------------------------------------------\n";
+  std::cout << "Bank PKO, jaki procent wprowadzic \n";
+  std::cout << "  (jesli podasz 0, procent pozostaje bez zmian): ";
+  std::cin >> temp;
+  if (temp == 0) {
+    k.lokata_miesieczna();
+  } else {
+    k.ustaw_procent(temp);
+    k.lokata_miesieczna();
+  }
+  std::cout << "-------------------------------------------------\n\n";
+}
+
+void zad3() {
+  konto Adam;
+  Adam.wplata(1000.01);
+  Adam.ustaw_procent();
+  std::cout << "Srodki Adama na koncie: " << Adam.sprawdz_srodki() << "zl." << std::endl;
+  std::cout << "Lokata w wyskokosci: " << Adam.sprawdz_procent() << "%" << std::endl;
+  Adam.wplata(1000.00); //Adam wpłaca 
+  if (Adam.wyplata(130.00)) {
+    std::cout << "Adam wybral pieniadze w bankomacie, stan konta: " << Adam.sprawdz_srodki() << std::endl;
+  } else
+    std::cout << "!!! Nie udalo sie wybrac pieniedzy" << std::endl;
+
+  std::cout << "Po miesiacu " << std::endl;
+  PKO(Adam);
+  std::cout << "Srodki Adama na koncie: " << Adam.sprawdz_srodki() << "zl." << std::endl;
+  std::cout << "Lokata w wyskokosci: " << Adam.sprawdz_procent() << "%" << std::endl;
 }
