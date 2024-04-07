@@ -14,10 +14,10 @@ int main() {
   zad1();
   zad2();
   zad3();
-  zad5();
+  zad4();
   zad6();
    */
-  zad4();
+  zad5();
 }
 
 class osoba {
@@ -241,4 +241,61 @@ void zad4() {
   p.podaj();
 
   zbadaj(z, p);
+}
+
+class kwadrat {
+  friend class interfejs;
+private:
+  int bok;
+public:
+  kwadrat(void) : bok(0) {}
+  ~kwadrat(void) {}
+  int pole(void) {
+    return bok * bok;
+  }
+};
+
+
+
+class interfejs {
+public:
+  interfejs(void) {}
+  ~interfejs(void) {}
+  void klawiatura(kwadrat& k);
+  void ekran(kwadrat& k);
+
+  int licz_pole(kwadrat& k) {
+    return k.pole();
+  }
+
+  int licz_obwod(kwadrat& k) {
+    return 4 * k.bok;
+  }
+};
+
+void interfejs::klawiatura(kwadrat& k) {
+  std::cout << "Podaj bok kwadratu: ";
+  std::cin >> k.bok;  //mam dostep do prywatnego pola klasy kwadrat 
+}
+
+void interfejs::ekran(kwadrat& k) {
+  std::cout << "Wpisana dlugosc boku to: " << k.bok << std::endl;
+}
+
+void zad5() {
+  //tworzymy klase kwadrat  
+  kwadrat kw;
+
+  //tworzymy klase interfejs (klasa zaprzyjzniona z klasa kwadrat) 
+  interfejs in;
+
+  //korzystamy z zaprzyjaznionej klasy  
+  in.klawiatura(kw);
+  in.ekran(kw);
+
+  //korzystamy z glownej klasy  
+  std::cout << "Pole wynosi: " << kw.pole() << std::endl;
+
+  std::cout << "Wyliczone pole wynosi: " << in.licz_pole(kw) << std::endl;
+  std::cout << "Wyliczony obwod wynosi: " << in.licz_obwod(kw) << std::endl;
 }
