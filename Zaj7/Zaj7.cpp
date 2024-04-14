@@ -8,13 +8,13 @@ void zad5();
 void zad6();
 
 int main() {
-  zad2();
   /*
   zad1();
-  zad3();
+  zad2();
   zad4();
   zad5();
    */
+  zad3();
 }
 
 class moj_typ {
@@ -174,4 +174,81 @@ void zad2() {
   pierwszy = liczba;
   std::cout << "w zmiennej liczba jest cyfra " << liczba << std::endl;
   std::cout << "pierwszy kwadrat " << pierwszy << std::endl;
+}
+
+class zespolona {
+private:
+  int re;
+  int im;
+
+public:
+  zespolona(void) : zespolona(0, 0) {};   //konsturktor domyślny - bezparametrowy
+
+  zespolona(int _re, int _im) :re(_re), im(_im) {};  //konstruktor parametrowy 
+
+  zespolona(zespolona& z) {
+    this->re = z.re;
+    this->im = z.im;
+  };  //konstruktor kopiujący 
+
+  zespolona(int a) :zespolona(a, 0) {};  //konstruktor konwertujący z int do zespolonej 
+
+  ~zespolona(void) {};   //destruktor 
+
+  zespolona& operator+(zespolona& z) {
+    this->re += z.re;
+    this->im += z.im;
+    return *this;
+  }   //do operacji typu: A+B 
+
+  zespolona& operator+(int a) {
+    this->re += a;
+    return *this;
+  }    //do operacji typu: A+2
+
+  friend zespolona operator+(int a, zespolona& z) {
+    zespolona x(a, 0);
+    x.re += z.re;
+    return x;
+  } //do operacji typu: 3+A 
+
+  operator int() {
+    int w = this->re;
+    return w;
+  }     //konwertujemy zespoloną na int 
+
+  friend std::ostream& operator<<(std::ostream& o, zespolona& z) {
+    o << z.re << '+' << z.im << 'i';
+    return o;
+  } //wypisywanie 
+};
+
+void zad3() {
+  zespolona A(2, 4), B, C;
+  std::cout << "zespolona 1: " << A << std::endl;
+  std::cout << "zespolona 2: " << B << std::endl;
+  std::cout << "zespolona 3: " << C << std::endl << std::endl;
+
+  //kopiujemy obiekt A do obiektu B 
+  B = A;
+  std::cout << "(kopiujemy) zespolona 2: " << B << std::endl;
+
+  //konwertujemy cyfrę i dodajemy ją do obiektu B 
+  B = 4;
+  std::cout << "(konwertujemy z int) zespolona 2: " << B << std::endl;
+
+  //dodawanie dwóch cyfr 
+  C = A + B;
+  std::cout << "(C=A+B), zespolona 3: " << C << std::endl;
+
+  //dodanie do A cyfry 2 
+  C = A + 2;
+  std::cout << "(C=A+2), zespolona 3: " << C << std::endl;
+
+  //dodanie cyfry 3 do A 
+  C = 3 + A;
+  std::cout << "(C=3+A), zespolona 3: " << C << std::endl;
+
+  //konwetrujemy na typ int 
+  std::cout << "(konwertujemy do int) zespolona 3: " << (int)C << std::endl;
 }
