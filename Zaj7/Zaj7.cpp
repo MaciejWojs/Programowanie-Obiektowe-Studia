@@ -11,10 +11,10 @@ int main() {
   /*
   zad1();
   zad2();
-  zad4();
+  zad3();
   zad5();
    */
-  zad3();
+  zad4();
 }
 
 class moj_typ {
@@ -252,3 +252,72 @@ void zad3() {
   //konwetrujemy na typ int 
   std::cout << "(konwertujemy do int) zespolona 3: " << (int)C << std::endl;
 }
+
+class bilet {
+private:
+  int gotowka;
+  int suma;
+  int czas;
+  float stawka;
+
+public:
+  bilet(void) : gotowka(0), suma(0), czas(0), stawka(0.0) {};
+  bilet(int a) : gotowka(0), suma(0), czas(0), stawka(a) {};
+  ~bilet(void) {};
+
+  void ustaw_stawke(int a) {
+    stawka = a;
+  }
+  int pobierz_stawke(void) {
+    return stawka;
+  };
+
+  bilet& operator+(int a);
+
+  friend std::ostream& operator<<(std::ostream& o, bilet& b);
+};
+
+bilet& bilet::operator+(int a) {
+  gotowka = a;
+  suma = suma + gotowka;
+  czas = suma / stawka;
+  return *this;
+}
+
+std::ostream& operator<<(std::ostream& o, bilet& b) {
+  o << "----------------------------" << '\n';
+  o << "wplaciles:       " << b.gotowka << '\n';
+  o << "suma gotowki:    " << b.suma << '\n';
+  o << "czas postoju: -> " << b.czas << '\n';
+  o << "----------------------------" << '\n';
+  return o;
+}
+void zad4() {
+  bilet A(2);
+  std::cout << "stawka godzinowa: " << A.pobierz_stawke() << std::endl;
+
+  std::cout << A;  //wyświetlamy bilet 
+
+  //wrzucamy 2zł, 3zł 
+  A + 2 + 3;
+  std::cout << A;
+
+  //mamy trzy bilety w tabeli  
+  bilet B[3];
+  for (int i = 0; i < 3; i++)
+    B[i].ustaw_stawke(i + 1);  //ustawiamy stawki godzinowe dla każdego  
+  //biletu osobno 
+
+//wyświetlamy trzy bilety 
+  for (int i = 0; i < 3; i++)
+    std::cout << B[i] << "Stawka: " << B[i].pobierz_stawke() << std::endl << std::endl;
+
+  //wrzucamy monety   
+  for (int i = 0; i < 3; i++)
+    B[i] + (2 * i);   //wrzucamy monety 2*i 
+
+  //wyświetlamy   
+  std::cout << std::endl << std::endl;
+  for (int i = 0; i < 3; i++)
+    std::cout << B[i] << "Stawka: " << B[i].pobierz_stawke() << std::endl << std::endl;
+};
