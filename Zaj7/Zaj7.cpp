@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ostream>
+using string = std::string;
 void zad1();
 void zad2();
 void zad3();
@@ -8,13 +9,11 @@ void zad5();
 void zad6();
 
 int main() {
-  /*
   zad1();
   zad2();
   zad3();
-  zad5();
-   */
   zad4();
+  zad5();
 }
 
 class moj_typ {
@@ -320,4 +319,74 @@ void zad4() {
   std::cout << std::endl << std::endl;
   for (int i = 0; i < 3; i++)
     std::cout << B[i] << "Stawka: " << B[i].pobierz_stawke() << std::endl << std::endl;
+};
+
+class osoba {
+private:
+  int indeks;
+  string imie;
+  string nazwisko;
+  string email;
+public:
+  osoba(void) : osoba(0, "", "", "") {};
+  osoba(int a, string b, string c, string d) : indeks(a), imie(b), nazwisko(c), email(d) {};
+  ~osoba(void) {};
+
+  void wczytaj(int a, string b, string c, string d) {
+    indeks = a;
+    imie = b;
+    nazwisko = c;
+    email = d;
+  };
+
+  void zmiana_imienia(string a) {
+    imie = a;
+  }
+  void zmiana_nazwiska(string a) {
+    nazwisko = a;
+  }
+
+  void zmiana_emaila(string a) {
+    email = a;
+  }
+
+  //definiujemy operatory które będą nam potrzebne 
+  osoba& operator=(int a) {
+    this->indeks = a;
+    return *this;
+  }  //operator ustawienie numer indeksu 
+
+  osoba& operator--(int) {
+    this->indeks -= 1;
+    return *this;
+  }   //operator zmniejsza numer indeksu o jeden 
+
+  osoba& operator++(int) {
+    this->indeks += 1;
+    return *this;
+  }  //operator zwiększa numer indeksu o jeden 
+
+  friend std::ostream& operator<<(std::ostream& o, osoba& a) {
+    o << "indeks: " << a.indeks << "\nimie: " << a.imie << "\nnazwisko: " << a.nazwisko << "\nemail: " << a.email << '\n';
+    return o;
+  }
+};
+
+void zad5() {
+  osoba student;
+  student.wczytaj(22, "Patrycja", "Kwiatkowska", "pk@interia.pl");
+  std::cout << student << std::endl;
+
+  osoba ja(10, "Alicja", "Adamek", "ali@wp.pl");
+  std::cout << ja << std::endl;
+  ja = 13;
+  ja--;
+  std::cout << ja << std::endl;
+
+  osoba ty;
+  ty = ja;
+  ty++;
+  ty.zmiana_imienia("Alina");
+  ty.zmiana_emaila("alina@onet.pl");
+  std::cout << ty;
 };
