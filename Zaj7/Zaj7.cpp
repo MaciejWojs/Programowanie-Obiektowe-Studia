@@ -8,9 +8,9 @@ void zad5();
 void zad6();
 
 int main() {
-  zad1();
-  /*
   zad2();
+  /*
+  zad1();
   zad3();
   zad4();
   zad5();
@@ -94,4 +94,84 @@ void zad1() {
   int b;
   b = z3;
   std::cout << "(int)b=z3= " << b << std::endl;
+}
+
+class kwadrat {
+private:
+  int bok;
+public:
+  kwadrat(void) : bok(0) {}
+  kwadrat(int x) : bok(x) {}
+  ~kwadrat(void) {}
+
+  bool operator==(kwadrat& a);
+  bool operator<(kwadrat& a) {
+    if (this->bok < a.bok) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  kwadrat operator--(int) {
+    this->bok -= 1;
+    return *this;
+  }
+
+  kwadrat operator+=(int a) {
+    this->bok += a;
+    return *this;
+  }
+
+  operator double() {
+    double x = (double)this->bok;
+    return x;
+  }
+
+  friend std::ostream& operator<<(std::ostream& o, kwadrat& k) {
+    o << k.bok << " x " << k.bok << '\n';
+    return o;
+  }
+};
+
+bool kwadrat::operator==(kwadrat& a) {
+  if (this->bok == a.bok)
+    return true;
+  else
+    return false;
+}
+
+void zad2() {
+  kwadrat pierwszy(5);
+  std::cout << "pierwszy kwadrat " << pierwszy << std::endl;
+
+  kwadrat drugi(4);
+  std::cout << "drugi kwadrat " << drugi << std::endl;
+
+  if (pierwszy == drugi)
+    std::cout << "kwadraty sa rowne" << std::endl;
+  else
+    std::cout << "kwadraty sa rozne" << std::endl;
+
+  pierwszy--;
+  if (pierwszy == drugi)
+    std::cout << "kwadraty sa rowne" << std::endl;
+  else
+    std::cout << "kwadraty sa rozne" << std::endl;
+
+  //dodajemy 5 do kwadratu 
+  drugi += 5;
+  std::cout << "drugi kwadrat " << drugi << std::endl;
+
+  if (pierwszy < drugi)
+    std::cout << "kwadrat drugi jest wiekszy" << std::endl;
+  else
+    std::cout << "kwadrat pierwszy jest wiekszy" << std::endl;
+
+  //zapiszmy cyfre 3.45 do kwadratu pierwszego (konwertujemy double do int) 
+  double liczba;
+  liczba = 3.34;
+  pierwszy = liczba;
+  std::cout << "w zmiennej liczba jest cyfra " << liczba << std::endl;
+  std::cout << "pierwszy kwadrat " << pierwszy << std::endl;
 }
