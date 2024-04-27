@@ -8,12 +8,12 @@ void zad3();
 void zad4();
 
 int main() {
-  zad2();
   /*
     zad1();
-    zad3();
+   zad2();
     zad4();
   */
+  zad3();
 }
 
 
@@ -185,3 +185,51 @@ void zad2() {
   mamy.wypisz();
   std::cout << std::endl;
 }
+
+
+class liczba {
+private:
+  int a;
+
+public:
+  liczba(void) : liczba(0) {}
+  liczba(int x) :a(x) {}
+  ~liczba(void) {}
+
+  void setLiczba(int l) {
+    a = l;
+  }
+
+  int getLiczba(void) {
+    return a;
+  }
+};
+
+class sejf {
+private:
+  liczba z;
+
+public:
+  sejf(liczba& x) : z(x) {};
+  ~sejf() {};
+
+  liczba& odczytaj(void) {
+    return z;
+  }
+
+  void zapisz(liczba& x) {
+    z = x;
+  }
+};
+
+void zad3() {
+  liczba A(23);
+  sejf S(A);
+  std::cout << "liczba: " << S.odczytaj().getLiczba() << std::endl;
+
+  liczba B;
+  B.setLiczba(66);
+  S.zapisz(B);
+  std::cout << "liczba: " << S.odczytaj().getLiczba() << std::endl;
+}
+
