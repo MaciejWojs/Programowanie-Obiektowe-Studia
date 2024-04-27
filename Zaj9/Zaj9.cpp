@@ -8,9 +8,9 @@ void zad3();
 void zad4();
 
 int main() {
-  zad1();
+  zad2();
   /*
-    zad2();
+    zad1();
     zad3();
     zad4();
   */
@@ -94,5 +94,94 @@ void zad1() {
   std::cout << std::endl;
   szkola uczen2(2, "Barska", 21, "Patrycja", "Adamowska");
   uczen2.opis();
+  std::cout << std::endl;
+}
+
+class silnik {
+private:
+  double pojemnosc;
+  int ilosc_cylindrow;
+
+public:
+  silnik(void) :pojemnosc(0.0), ilosc_cylindrow(0) {}
+  silnik(int p, int i) : pojemnosc(p), ilosc_cylindrow(i) {}
+  ~silnik() {}
+
+  void set_pojemnosc(double p) {
+    pojemnosc = p;
+  }
+
+  void set_ilosc_cylindrow(int i) {
+    ilosc_cylindrow = i;
+  }
+
+  double get_pojemnosc(void) {
+    return pojemnosc;
+  }
+
+  int get_ilosc_cylindrow(void) {
+    return ilosc_cylindrow;
+  }
+};
+
+class skrzynia {
+private:
+  string rodzaj;
+  int ilosc_biegow;
+
+public:
+  skrzynia(void) :skrzynia("brak", 0) {};
+  skrzynia(string r, int i) :rodzaj(r), ilosc_biegow(i) {}
+  ~skrzynia(void) {}
+
+  void set_rodzaj(string r) {
+    rodzaj = r;
+  }
+
+  void set_ilosc_biegow(int i) {
+    ilosc_biegow = i;
+  }
+
+  string get_rodzaj(void) {
+    return rodzaj;
+  }
+
+  int get_ilosc_biegow(void) {
+    return ilosc_biegow;
+  }
+};
+
+class samochod {
+private:
+  string kolor;
+  string marka;
+  silnik Silnik;
+  skrzynia Skrzynia;
+public:
+  samochod(void) : kolor(""), marka("") {}
+  samochod(string k, string m, double p, int c, string r, int i) : kolor(k), marka(m), Silnik(p, c), Skrzynia(r, i) {};
+  ~samochod(void) {}
+
+  void wypisz(void) {
+    std::cout << "Marka: " << marka << std::endl;;
+    std::cout << "Kolor: " << kolor << std::endl;;
+    std::cout << "Pojemnosc silnika: " << Silnik.get_pojemnosc() << std::endl;
+    std::cout << "Ilosc cylindrow: " << Silnik.get_ilosc_cylindrow() << std::endl;
+    std::cout << "Skrzynia biekow rodzaj: " << Skrzynia.get_rodzaj() << std::endl;
+    std::cout << "Ilosc biegow: " << Skrzynia.get_ilosc_biegow() << std::endl;
+  }
+};
+
+void zad2() {
+  samochod moj;
+  moj.wypisz();
+  std::cout << std::endl;
+
+  samochod taty("czarny", "BMW", 2.1, 6, "automat", 6);
+  taty.wypisz();
+  std::cout << std::endl;
+
+  samochod mamy("czerwony", "Skoda", 1.7, 5, "reczna", 5);
+  mamy.wypisz();
   std::cout << std::endl;
 }
