@@ -1,4 +1,5 @@
 #include <iostream>
+using string = std::string;
 
 void zad1();
 void zad2();
@@ -8,10 +9,10 @@ void zad5();
 void zad6();
 
 int main() {
-  zad2();
+  zad3();
   /*
     zad1();
-    zad3();
+    zad2();
     zad4();
     zad5();
     zad6();
@@ -105,4 +106,63 @@ void zad2() {
   std::cout << "liczba 2: " << B.druk2() << std::endl;
 
   std::cout << "suma liczb " << B.dodaj() << std::endl;
+}
+
+class pozycja {
+private:
+  string autor;
+  string tytul;
+  int rok;  //rok wydania 
+
+public:
+  pozycja(string a, string b, int c) : autor(a), tytul(b), rok(c) {};
+  ~pozycja() {};
+
+  string wypisz_autor(void) {
+    return autor;
+  }
+
+  string wypisz_tytul(void) {
+    return tytul;
+  }
+
+  int wypisz_rok(void) {
+    return rok;
+  }
+};
+
+class wielopozycja : public pozycja {
+private:
+  string kategoria;
+  string ilosc_czesci;
+public:
+  wielopozycja(string a, string b, int c, string d, string e) : pozycja(a, b, c), kategoria(d), ilosc_czesci(e) {};
+  ~wielopozycja() {};
+
+  string wypisz_kategoria(void) {
+    return kategoria;
+  }
+
+  string wypisz_ilosc_czesci() {
+    return ilosc_czesci;
+  }
+};
+
+void zad3() {
+  //tworzymy ulubioną książkę 
+  pozycja powiesc("Sienkiewicz", "Krzyzacy", 2001);
+  std::cout << "Moja ulubiona ksiazka" << std::endl;
+  std::cout << "Tytul: " << powiesc.wypisz_tytul() << std::endl;
+  std::cout << "Rok wydania: " << powiesc.wypisz_rok() << std::endl;
+  std::cout << std::endl;
+
+  //tworzymy ulubioną książkę naukową 
+  wielopozycja naukowa("Grebosz", "Opus magnum C++", 2018, "programowanie", "trzy");
+  std::cout << "Moja ulubiona ksiazka naukowa" << std::endl;
+  std::cout << "Tytul: " << naukowa.wypisz_tytul() << std::endl;
+  std::cout << "Autor: " << naukowa.wypisz_autor() << std::endl;
+  std::cout << "Rok wydania: " << naukowa.wypisz_rok() << std::endl;
+  std::cout << "Kategoria: " << naukowa.wypisz_kategoria() << std::endl;
+  std::cout << "Ilosc czesci: " << naukowa.wypisz_ilosc_czesci() << std::endl;
+  std::cout << std::endl;
 }
