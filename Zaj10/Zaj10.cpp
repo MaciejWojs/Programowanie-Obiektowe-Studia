@@ -14,9 +14,9 @@ int main() {
     zad2();
     zad3();
     zad4();
-    zad6();
+    zad5();
     */
-  zad5();
+  zad6();
 }
 
 class bazowa {
@@ -285,4 +285,65 @@ void zad5() {
     std::cout << "suma liczb to: " << kal.suma() << std::endl;
     std::cout << "roznica liczb to: " << kal.roznica();
   }
+}
+
+class _2D {
+private:
+  int bok_a;
+  int bok_b;
+public:
+  _2D(void) : bok_a(0), bok_b(0) {};
+  _2D(int a, int b) : bok_a(a), bok_b(b) {};
+  ~_2D(void) {};
+
+  void wczytaj(int a, int b) {
+    bok_a = a;
+    bok_b = b;
+  }
+
+  int wypisz_a(void) {
+    return bok_a;
+  }
+  int wypisz_b(void) {
+    return bok_b;
+  }
+};
+
+class _3D {
+private:
+  int wys;
+public:
+  _3D(void) : wys(0) {};
+  _3D(int a) : wys(a) {};
+  ~_3D(void) {};
+
+  void wczytaj(int a) {
+    wys = a;
+  }
+
+  int wypisz(void) {
+    return wys;
+  }
+};
+
+class szescian : public _2D, public _3D {
+public:
+  szescian(void) : _2D(), _3D() {};
+  szescian(int a, int b, int c) : _2D(a, b), _3D(c) {};
+  ~szescian(void) {};
+  int objetosc(void) {
+    return _2D::wypisz_a() * _2D::wypisz_b() * _3D::wypisz();
+  }
+};
+
+void zad6() {
+  szescian x;
+  x._2D::wczytaj(2, 2);
+  x._3D::wczytaj(2);
+  std::cout << "szescian o wymiarach 2x2x2" << std::endl;
+  std::cout << "objetosc szescianu to: " << x.objetosc() << std::endl;
+
+  szescian y(3, 3, 3);
+  std::cout << "szescian o wymiarach 3x3x3" << std::endl;
+  std::cout << "objetosc szescianu to: " << y.objetosc();
 }
