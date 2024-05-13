@@ -9,14 +9,14 @@ void zad5();
 void zad6();
 
 int main() {
-  zad3();
   /*
     zad1();
     zad2();
-    zad4();
+    zad3();
     zad5();
     zad6();
     */
+  zad4();
 }
 
 class bazowa {
@@ -158,6 +158,42 @@ void zad3() {
 
   //tworzymy ulubioną książkę naukową 
   wielopozycja naukowa("Grebosz", "Opus magnum C++", 2018, "programowanie", "trzy");
+  std::cout << "Moja ulubiona ksiazka naukowa" << std::endl;
+  std::cout << "Tytul: " << naukowa.wypisz_tytul() << std::endl;
+  std::cout << "Autor: " << naukowa.wypisz_autor() << std::endl;
+  std::cout << "Rok wydania: " << naukowa.wypisz_rok() << std::endl;
+  std::cout << "Kategoria: " << naukowa.wypisz_kategoria() << std::endl;
+  std::cout << "Ilosc czesci: " << naukowa.wypisz_ilosc_czesci() << std::endl;
+  std::cout << std::endl;
+}
+
+class wielopozycja2 : private pozycja {
+private:
+  string kategoria;
+  string ilosc_czesci;
+public:
+  wielopozycja2(string a, string b, int c, string d, string e) : pozycja(a, b, c), kategoria(d), ilosc_czesci(e) {};
+  ~wielopozycja2() {};
+
+  string wypisz_kategoria(void) {
+    return kategoria;
+  }
+
+  string wypisz_ilosc_czesci() {
+    return ilosc_czesci;
+  }
+};
+
+void zad4() {
+  //tworzymy ulubioną książkę 
+  pozycja powiesc("Sienkiewicz", "Krzyzacy", 2001);
+  std::cout << "Moja ulubiona ksiazka" << std::endl;
+  std::cout << "Tytul: " << powiesc.wypisz_tytul() << std::endl;
+  std::cout << "Rok wydania: " << powiesc.wypisz_rok() << std::endl;
+  std::cout << std::endl;
+
+  //tworzymy ulubioną książkę naukową 
+  wielopozycja2 naukowa("Grebosz", "Opus magnum C++", 2018, "programowanie", "trzy");
   std::cout << "Moja ulubiona ksiazka naukowa" << std::endl;
   std::cout << "Tytul: " << naukowa.wypisz_tytul() << std::endl;
   std::cout << "Autor: " << naukowa.wypisz_autor() << std::endl;
