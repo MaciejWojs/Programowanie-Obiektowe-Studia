@@ -9,13 +9,13 @@ void zad4();
 void zad5();
 
 int main() {
-  zad3();
   /*
   zad1();
   zad2();
-  zad4();
+  zad3();
   zad5();
    */
+  zad4();
 }
 
 class figura {
@@ -125,4 +125,80 @@ void wyswietl(pojazd* s) {
 void zad3() {
   samochod bmw(220.0, 1000, 5, 3.5);
   wyswietl(&bmw);
+}
+
+class osoba {
+private:
+  string imie;
+  string nazwisko;
+protected:
+  string plec;
+public:
+  osoba(string a, string b, string c) : imie(a), nazwisko(b), plec(c) {};
+  ~osoba(void) {};
+
+  void set_imie(string a) {
+    imie = a;
+  }
+
+  void set_nazwisko(string a) {
+    nazwisko = a;
+  }
+
+  void set_plec(string a) {
+    plec = a;
+  }
+
+  string get_imie(void) {
+    return imie;
+  }
+
+  string get_nazwisko(void) {
+    return nazwisko;
+  }
+
+  string get_plec(void) {
+    return plec;
+  }
+
+  virtual int get_indeks(void) { return 0; }
+  virtual string get_kierunek(void) { return "-"; }
+};
+
+class student :public osoba {
+private:
+  int indeks;
+  string kierunek;
+public:
+  student(string a, string b, string c, int d, string e) : osoba(a, b, c), indeks(d), kierunek(e) {};
+  ~student(void) {};
+
+  void set_indeks(int a) {
+    indeks = a;
+  }
+
+  void set_kierunek(string a) {
+    kierunek = a;
+  }
+
+  int get_indeks(void) {
+    return indeks;
+  }
+
+  string get_kierunek(void) {
+    return kierunek;
+  }
+};
+
+void wypisz(osoba* o) {
+  std::cout << "imie " << o->get_imie() << std::endl;
+  std::cout << "nazwisko " << o->get_nazwisko() << std::endl;
+  std::cout << "plec " << o->get_plec() << std::endl;
+  std::cout << "indeks " << o->get_indeks() << std::endl;
+  std::cout << "kierunek " << o->get_kierunek() << std::endl;
+}
+
+void zad4() {
+  student pierwszy("Jan", "Kwiatkowski", "M", 001, "informatyka");
+  wypisz(&pierwszy);
 }
