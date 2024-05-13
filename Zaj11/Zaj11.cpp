@@ -9,10 +9,10 @@ void zad4();
 void zad5();
 
 int main() {
-  zad2();
+  zad3();
   /*
   zad1();
-  zad3();
+  zad2();
   zad4();
   zad5();
    */
@@ -86,3 +86,43 @@ void zad2() {
   std::cout << std::endl << std::endl;
 }
 
+class pojazd {
+private:
+  double max_predkosc;
+  int masa;
+public:
+  pojazd(double a, int b) :max_predkosc(a), masa(b) {}
+  ~pojazd(void) {}
+  void setpre(double a) { max_predkosc = a; }
+  void setmasa(int a) { masa = a; }
+  double getpre(void) { return max_predkosc; }
+  int getmasa(void) { return masa; }
+
+  virtual int getdrzwi(void) { return -1; };
+  virtual double getdlugosc(void) { return -1; };
+};
+
+class samochod :public pojazd {
+private:
+  int ilosc_drzwi;
+  double dlugosc;
+public:
+  samochod(double a, int b, int c, double d) : pojazd(a, b), ilosc_drzwi(c), dlugosc(d) {}
+  ~samochod() {}
+  void setdrzwi(int a) { ilosc_drzwi = a; }
+  void setdlugosc(double a) { dlugosc = a; }
+  int getdrzwi(void) { return ilosc_drzwi; }
+  double getdlugosc(void) { return dlugosc; }
+};
+
+void wyswietl(pojazd* s) {
+  std::cout << "maksymalna predkosc: " << s->getpre() << std::endl;
+  std::cout << "masa: " << s->getmasa() << std::endl;
+  std::cout << "ilosc drzwi: " << s->getdrzwi() << std::endl;
+  std::cout << "dlugosc: " << s->getdlugosc() << std::endl;
+}
+
+void zad3() {
+  samochod bmw(220.0, 1000, 5, 3.5);
+  wyswietl(&bmw);
+}
