@@ -13,9 +13,9 @@ int main() {
   zad1();
   zad2();
   zad3();
-  zad5();
-   */
   zad4();
+   */
+  zad5();
 }
 
 class figura {
@@ -201,4 +201,157 @@ void wypisz(osoba* o) {
 void zad4() {
   student pierwszy("Jan", "Kwiatkowski", "M", 001, "informatyka");
   wypisz(&pierwszy);
+}
+
+class osoba2 {
+private:
+  string kolor;
+  int poz_x;
+  int poz_y;
+protected:
+  int punkty;
+public:
+  osoba2(void);
+  osoba2(string a, int b, int c);
+  ~osoba2(void) {};
+
+  void przod(void);
+  void tyl(void);
+  void lewo(void);
+  void prawo(void);
+
+  void set_kolor(string a) {
+    kolor = a;
+  }
+
+  string get_kolor(void) {
+    return kolor;
+  }
+
+  void set_x(int a) {
+    poz_x = a;
+  }
+
+  int get_x(void) {
+    return poz_x;
+  }
+
+  void set_y(int a) {
+    poz_y = a;
+  }
+
+  int get_y(void) {
+    return poz_y;
+  }
+
+  virtual void opis_postaci(void);
+};
+
+
+osoba2::osoba2(void) {
+  punkty = 0;
+  kolor = "";
+  poz_x = 0;
+  poz_y = 0;
+}
+
+osoba2::osoba2(string a, int b, int c) {
+  punkty = 0;
+  kolor = a;
+  poz_x = b;
+  poz_y = c;
+}
+
+void osoba2::przod(void) {
+  poz_x += 1;
+}
+
+void osoba2::tyl(void) {
+  poz_x -= 1;
+}
+
+void osoba2::lewo(void) {
+  poz_y -= 1;
+}
+
+void osoba2::prawo(void) {
+  poz_y += 1;
+}
+
+void osoba2::opis_postaci(void) {
+  std::cout << "BLAD - ZA MALO DANYCH" << std::endl;
+}
+
+class gracz :public osoba2 {
+private:
+  string imie;
+public:
+  gracz(void) : osoba2(), imie("") {};
+  gracz(string a, int b, int c, string d) : osoba2(a, b, c), imie(d) {};
+  ~gracz(void) {};
+
+  void ustaw_imie(string a) {
+    imie = a;
+  }
+  string get_imie(void) {
+    return imie;
+  }
+
+  void opis_postaci(void);
+};
+
+void gracz::opis_postaci(void) {
+  std::cout << std::endl;
+  std::cout << "GRACZ" << std::endl;
+  std::cout << "imie: " << imie << std::endl;
+  std::cout << "Kolor: " << get_kolor() << std::endl;
+  std::cout << "Pozycja na planszy: " << get_x() << " x " << get_y() << std::endl;
+  std::cout << "Ilosc punktow: " << punkty << std::endl;
+  std::cout << "===============================" << std::endl;
+}
+
+class przeciwnik :public osoba2 {
+private:
+  string poziom;
+public:
+  przeciwnik(void) : osoba2(), poziom("") {};
+  przeciwnik(string a, int b, int c, string d) : osoba2(a, b, c), poziom(d) {};
+  ~przeciwnik(void) {};
+
+  void set_poziom(string a) {
+    poziom = a;
+  };
+
+  string get_poziom(void) {
+    return poziom;
+  }
+
+  void opis_postaci(void);
+};
+
+void przeciwnik::opis_postaci(void) {
+  std::cout << std::endl;
+  std::cout << "PRZECIWNIK" << std::endl;
+  std::cout << "Kolor: " << get_kolor() << std::endl;
+  std::cout << "Pozycja na planszy: " << get_x() << " x " << get_y() << std::endl;
+  std::cout << "Ilosc punktow: " << punkty << std::endl;
+  std::cout << "Poziom: " << poziom << std::endl;
+  std::cout << "===============================" << std::endl;
+}
+
+void zad5() {
+  gracz ja("czerwony", 10, 10, "Jan");   //tworzymy gracza 
+  przeciwnik komputer("czarny", 0, 0, "podstawowy"); //tworzymy przeciwnika 
+
+  for (int i = 0; i < 10; i++)  //przestawiamy gracza o 10 pozycji do przodu  
+    ja.przod();
+
+  for (int i = 0; i < 4; i++)  //przestawiamy przeciwnika o 4 pozycje w lewo  
+    komputer.lewo();
+
+  //zobaczmy opis 
+  ja.opis_postaci();
+  komputer.opis_postaci();
+
+  //dalsza mechanika gry 
 }
