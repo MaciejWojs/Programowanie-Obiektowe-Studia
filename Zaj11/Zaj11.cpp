@@ -9,12 +9,12 @@ void zad4();
 void zad5();
 
 int main() {
-  zad1();
+  zad2();
   /*
-    zad2();
-    zad3();
-    zad4();
-    zad5();
+  zad1();
+  zad3();
+  zad4();
+  zad5();
    */
 }
 
@@ -25,13 +25,13 @@ protected:
 public:
   figura() : figura(0, 0) {};
   figura(int x, int y) : a(x), b(y) {};
-  void klawiatura(void) {
+  virtual void klawiatura(void) {
     std::cout << "Podaj elementy na figure \nbok 1: ";
     std::cin >> a;
     std::cout << "bok 2: ";
     std::cin >> b;
   }
-  void wyswietl(void) {
+  virtual void wyswietl(void) {
     std::cout << "FIGURA\no bokach " << a << "x" << b;
   }
 };
@@ -63,3 +63,26 @@ void zad1() {
   std::cout << std::endl;
   k.figura::wyswietl();
 }
+
+void zad2() {
+  figura f;
+  figura* ws_f;
+  ws_f = &f;
+  ws_f->klawiatura();
+  ws_f->wyswietl();
+  std::cout << std::endl << std::endl;
+
+  kwadrat k;
+  kwadrat* ws_k;
+  ws_k = &k;
+  ws_k->klawiatura();
+  ws_k->wyswietl();
+  std::cout << std::endl << std::endl;
+
+  //Zmieniono metody na virtualne w klasie figura
+  ws_f = &k;
+  ws_f->klawiatura();
+  ws_f->wyswietl();
+  std::cout << std::endl << std::endl;
+}
+
