@@ -9,9 +9,9 @@ void zad4();
 void zad5();
 
 int main() {
-  zad1();
-  /*
   zad2();
+  /*
+  zad1();
   zad3();
   zad4();
   zad5();
@@ -92,4 +92,111 @@ void zad1() {
   wsk->wymiary();
   std::cout << "obwod kwadratu " << wsk->obwod() << std::endl;
   std::cout << "pole kwadratu " << wsk->pole() << std::endl << std::endl;
+}
+
+class osoba {
+private:
+  string imie;
+  string nazwisko;
+public:
+  osoba(void) :imie(""), nazwisko("") {}
+  osoba(string a, string b) :imie(a), nazwisko(b) {}
+
+  virtual ~osoba(void) {}
+  void setImie(string a) {
+    imie = a;
+  }
+
+  void setNazwisko(string a) {
+    nazwisko = a;
+  }
+
+  string getImie(void) {
+    return imie;
+  }
+
+  string getNazwisko(void) {
+    return nazwisko;
+  }
+
+  virtual void wyswietl(void) = 0;
+};
+
+class student : public osoba {
+private:
+  int album;
+  string kierunek;
+public:
+  student(void) :osoba(), album(0), kierunek("") {}
+  student(string a, string b, int c, string d) : osoba(a, b), album(c), kierunek(d) {}
+  ~student(void) {}
+
+  void setAlbum(int a) {
+    album = a;
+  }
+
+  void setKierunek(string a) {
+    kierunek = a;
+  }
+
+  int getAlbum(void) {
+    return album;
+  }
+
+  string getKierunek(void) {
+    return kierunek;
+  }
+
+  virtual void wyswietl(void) {
+    std::cout << "Jestem studentem\nnazywam sie " << getImie() << ' ' << getNazwisko() << "\nmoj nr albumu to " << album << ", kierunek to " << kierunek << '\n';
+  };
+};
+
+class pracownik : public osoba {
+private:
+  string stopien;
+  int wyplata;
+
+public:
+  pracownik(void) : osoba(), stopien(""), wyplata(0) {};
+  pracownik(string a, string b, string c, int d) : osoba(a, b), stopien(c), wyplata(d) {};
+  ~pracownik(void) {};
+
+  void setStopien(string a) {
+    stopien = a;
+  }
+
+  void setWyplata(int a) {
+    wyplata = a;
+  }
+
+  string getStopien(void) {
+    return stopien;
+  }
+
+  int getWyplata(void) {
+    return wyplata;
+  }
+
+  virtual void wyswietl() {
+    std::cout << "Jestem pracownikiem\nnazywam sie " << getImie() << ' ' << getNazwisko() << "\nmoj stopien naukowy to " << stopien << ", zarabiam " << wyplata << "zl\n";
+  }
+};
+
+void zad2() {
+  osoba* osoby[5] = {
+  new pracownik("Jan","Kowalski","dr.",2000),
+  new student("Oskar","Kwiatkowski",10012,"informatyka"),
+  new student("Mieczyslaw","Sroka",10014,"informatyka"),
+  new student("Pawel","Baran",10015,"informatyka"),
+  new student("Patrycja","Biel",10018,"informatyka") };
+
+  for (int i = 0;i < 5;i++) {
+    osoby[i]->wyswietl();
+    std::cout << std::endl;
+  }
+
+  for (int i = 4;i >= 0;i--) {
+    delete osoby[i];
+  }
 }
