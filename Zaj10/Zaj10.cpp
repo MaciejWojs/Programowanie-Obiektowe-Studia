@@ -13,10 +13,10 @@ int main() {
     zad1();
     zad2();
     zad3();
-    zad5();
+    zad4();
     zad6();
     */
-  zad4();
+  zad5();
 }
 
 class bazowa {
@@ -184,21 +184,105 @@ public:
   }
 };
 
-void zad4() {
-  //tworzymy ulubioną książkę 
-  pozycja powiesc("Sienkiewicz", "Krzyzacy", 2001);
-  std::cout << "Moja ulubiona ksiazka" << std::endl;
-  std::cout << "Tytul: " << powiesc.wypisz_tytul() << std::endl;
-  std::cout << "Rok wydania: " << powiesc.wypisz_rok() << std::endl;
-  std::cout << std::endl;
 
-  //tworzymy ulubioną książkę naukową 
-  wielopozycja2 naukowa("Grebosz", "Opus magnum C++", 2018, "programowanie", "trzy");
-  std::cout << "Moja ulubiona ksiazka naukowa" << std::endl;
-  std::cout << "Tytul: " << naukowa.wypisz_tytul() << std::endl;
-  std::cout << "Autor: " << naukowa.wypisz_autor() << std::endl;
-  std::cout << "Rok wydania: " << naukowa.wypisz_rok() << std::endl;
-  std::cout << "Kategoria: " << naukowa.wypisz_kategoria() << std::endl;
-  std::cout << "Ilosc czesci: " << naukowa.wypisz_ilosc_czesci() << std::endl;
-  std::cout << std::endl;
+//Zakomentowane aby sie kompilowalo 
+// To zadanie nie dziala - celowa trudnosc?
+
+// void zad4() {
+//   //tworzymy ulubioną książkę 
+//   pozycja powiesc("Sienkiewicz", "Krzyzacy", 2001);
+//   std::cout << "Moja ulubiona ksiazka" << std::endl;
+//   std::cout << "Tytul: " << powiesc.wypisz_tytul() << std::endl;
+//   std::cout << "Rok wydania: " << powiesc.wypisz_rok() << std::endl;
+//   std::cout << std::endl;
+
+//   //tworzymy ulubioną książkę naukową 
+//   wielopozycja2 naukowa("Grebosz", "Opus magnum C++", 2018, "programowanie", "trzy");
+//   std::cout << "Moja ulubiona ksiazka naukowa" << std::endl;
+//   std::cout << "Tytul: " << naukowa.wypisz_tytul() << std::endl;
+//   std::cout << "Autor: " << naukowa.wypisz_autor() << std::endl;
+//   std::cout << "Rok wydania: " << naukowa.wypisz_rok() << std::endl;
+//   std::cout << "Kategoria: " << naukowa.wypisz_kategoria() << std::endl;
+//   std::cout << "Ilosc czesci: " << naukowa.wypisz_ilosc_czesci() << std::endl;
+//   std::cout << std::endl;
+// }
+
+class kalkulator {
+private:
+  int liczba1;
+  int liczba2;
+
+protected:
+  kalkulator(void) {};
+  ~kalkulator(void) {};
+  void set1(int a) {
+    liczba1 = a;
+  }
+  void set2(int a) {
+    liczba2 = a;
+  }
+  int get1(void) {
+    return liczba1;
+  }
+  int get2(void) {
+    return liczba2;
+  }
+  int dodawanie(void) {
+    return liczba1 + liczba2;
+  }
+  int odejmowanie(void) {
+    return liczba1 - liczba2;
+  }
+};
+
+class interfejs : private kalkulator {
+public:
+  interfejs(void) : kalkulator() {};
+  ~interfejs(void) {};
+  int wczytaj(int a, int b) {
+    kalkulator::set1(a);
+    kalkulator::set2(b);
+    bool sukces = false;
+    if (kalkulator::get1() == a && kalkulator::get2() == b) {
+      sukces = true;
+    }
+    return sukces;
+  }
+
+  int suma(void) {
+    return kalkulator::get1() + kalkulator::get2();
+  }
+
+  int roznica(void) {
+    return kalkulator::get1() - kalkulator::get2();
+  }
+};
+
+int podaj(int a) {
+  std::cout << "Podaj";
+  switch (a) {
+  case 1: std::cout << " pierwsza"; break;
+  case 2: std::cout << " druga"; break;
+  case 3: std::cout << " trzecia"; break;
+  case 4: std::cout << " czwarta"; break;
+  default: std::cout << "";
+  }
+  std::cout << " cyfre wieksza do zera ";
+  int temp;
+  std::cin >> temp;
+  return temp;
+}
+
+void zad5() {
+  interfejs kal;
+  std::cout << "Program kalkulator, dziala tylko na dodatnich cyfrach" << std::endl;
+  int x, y;
+  x = podaj(1);
+  y = podaj(2);
+  if (!kal.wczytaj(x, y))
+    std::cout << "Bledne dane, uruchom program jeszcze raz z poprawnymi danymi" << std::endl;
+  else {
+    std::cout << "suma liczb to: " << kal.suma() << std::endl;
+    std::cout << "roznica liczb to: " << kal.roznica();
+  }
 }
