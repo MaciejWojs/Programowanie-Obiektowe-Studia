@@ -12,10 +12,10 @@ int main() {
   /*
   zad1();
   zad2();
-  zad4();
+  zad3();
   zad5();
   */
-  zad3();
+  zad4();
 }
 
 class figura {
@@ -282,4 +282,71 @@ void zad3() {
   figura2* f;
   f = &kw;
   f->rysuj();
+}
+
+class figura3 {
+public:
+  virtual void out(std::ostream& o) = 0;
+  friend std::ostream& operator<<(std::ostream& o, figura& f);
+};
+
+std::ostream& operator<<(std::ostream& o, figura3& f) {
+  o << "-->>";
+  f.out(o);
+  o << "<<--";
+  return o;
+}
+
+class kwadrat3 : public figura3 {
+private:
+  int x;
+public:
+  kwadrat3(int a) : figura3(), x(a) {}
+  ~kwadrat3() {}
+
+  int getx(void) {
+    return x;
+  }
+
+  void out(std::ostream& o) {
+    o << " kwadrat o wymiarach " << x << " x " << x << " ";
+  }
+};
+
+class szescian : public kwadrat3 {
+private:
+  int h;
+public:
+  szescian(int a, int b) : kwadrat3(a), h(b) {};
+  ~szescian() {};
+
+  void out(std::ostream& o) {
+    o << " szescian o wymiarach " << getx() << " x " << getx() << " x " << h << " ";
+  }
+};
+
+class prostokat3 : public figura3 {
+private:
+  int a;
+  int b;
+public:
+  prostokat3(int x, int y) : figura3(), a(x), b(y) {};
+  ~prostokat3() {};
+
+  void out(std::ostream& o) {
+    o << " prostokat o wymiarach " << a << " x " << b << ' ';
+  }
+};
+
+void zad4() {
+  kwadrat3 kw(5);
+  std::cout << kw;
+  std::cout << std::endl;
+
+  szescian sz(3, 4);
+  std::cout << sz;
+  std::cout << std::endl;
+
+  prostokat3 pr(3, 6);
+  std::cout << pr << std::endl;
 }
