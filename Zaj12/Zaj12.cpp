@@ -13,9 +13,9 @@ int main() {
   zad1();
   zad2();
   zad3();
-  zad5();
-  */
   zad4();
+  */
+  zad5();
 }
 
 class figura {
@@ -349,4 +349,70 @@ void zad4() {
 
   prostokat3 pr(3, 6);
   std::cout << pr << std::endl;
+}
+
+class silnik {
+private:
+  double pojemnosc;
+  int moc;
+public:
+  silnik(void) :pojemnosc(0), moc(0) {}
+  silnik(double a, int b) :pojemnosc(a), moc(b) {}
+  ~silnik() {}
+
+  void setpojemnosc(double a) {
+    pojemnosc = a;
+  }
+
+  void setmoc(int a) {
+    moc = a;
+  }
+
+  double getpojemnosc(void) {
+    return pojemnosc;
+  }
+
+  int getmoc(void) {
+    return moc;
+  }
+};
+
+class skrzynia_biegow {
+private:
+  int ilosc;
+public:
+  skrzynia_biegow(void) : ilosc(0) {}
+  skrzynia_biegow(int a) : ilosc(a) {}
+  ~skrzynia_biegow(void) {}
+
+  void setilosc(int a) {
+    ilosc = a;
+  }
+
+  int getilosc(void) {
+    return ilosc;
+  }
+};
+
+class samochod : public silnik, public skrzynia_biegow {
+private:
+  int rok_produkcji;
+public:
+  samochod(void) : samochod(0.0, 0, 0, 0) {}
+  samochod(double poj, int moc_silnika, int ilosc_biegow, int rok) : silnik(poj, moc_silnika), skrzynia_biegow(ilosc_biegow), rok_produkcji(rok) {}
+  ~samochod() {}
+
+  void wypisz() {
+    std::cout << "Samochod\nrok produkcji: " << rok_produkcji << "\nilosc biegow: " << getilosc() << "\npojemnosc silnika: " << getpojemnosc() << "\nmoc silnika: " << getmoc() << '\n';
+  }
+};
+
+void zad5() {
+  samochod* bmw = new samochod(1.9, 120, 6, 2022);
+  bmw->wypisz();
+  delete bmw;
+  std::cout << std::endl;
+
+  samochod audi(2.1, 150, 5, 2021);
+  audi.wypisz();
 }
